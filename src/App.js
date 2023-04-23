@@ -1,7 +1,7 @@
 import React from "react";
 import { Authentication } from "./components/authentication/authentication";
 import { PasswordReset } from "./components/passwordReset/passwordReset";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 const App = props => {
   // const [file, setFile] = useState();
@@ -16,6 +16,7 @@ const App = props => {
         <Switch>
             <Route path="/auth" exact component={Authentication} />
             <Route path="/forgot_password" exact component={PasswordReset} /> 
+            <Redirect to="/auth" />
         </Switch>
     </React.Fragment>
   );
