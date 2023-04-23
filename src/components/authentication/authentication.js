@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import Card from "../../util/card/card";
 
 export const Authentication = () => {
@@ -38,7 +39,7 @@ export const Authentication = () => {
                         <input style={{margin: "7px 0px"}} type="password" placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
                         <button type="submit">Login</button>
-                        <a href="/forgot_password"><p>Forgot Password!</p></a>
+                        <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
                     </form>
                 </div>
             </Card>

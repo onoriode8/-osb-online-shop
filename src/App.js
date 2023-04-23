@@ -15,9 +15,9 @@ const App = props => {
         {/* <input type="file" style={{display: "none"}} onChange={onChangeHandler}/> */}
         <Switch>
             <Route path="/auth" exact component={Authentication} />
-            <Route path="/forgot_password" exact component={PasswordReset} /> 
-            <Redirect to="/auth" />
+            <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
         </Switch>
+        <Redirect to="/auth" />
     </React.Fragment>
   );
 }
