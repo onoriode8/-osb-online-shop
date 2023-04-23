@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Authentication } from "./components/authentication/authentication";
+import { PasswordReset } from "./components/passwordReset/passwordReset";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
+const App = props => {
+  // const [file, setFile] = useState();
+
+  // const onChangeHandler = (event) => {
+  //   console.log(event.target.file);
+  //   setFile(event.target.file);
+  // }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+        {/* <input type="file" style={{display: "none"}} onChange={onChangeHandler}/> */}
+        <Switch>
+            <Route path="/auth" exact component={Authentication} />
+            <Route path="/forgot_password" exact component={PasswordReset} /> 
+        </Switch>
+    </React.Fragment>
   );
 }
 

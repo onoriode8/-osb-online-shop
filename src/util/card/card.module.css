@@ -1,0 +1,31 @@
+.card {
+    border: 1px solid grey;
+    padding: 20px 1px;
+    margin: 15% 8px;
+    position: fixed;
+    left: 35%;
+    right: 35%;
+    background: #dfdfdf;
+    text-align: center;
+}
+
+@media (min-width: 500px) {
+    .card {
+        left: 30%;
+        right: 30%;
+    }
+}
+
+@media (max-width: 500px) {
+    .card {
+        left: 20%;
+        right: 20%;
+    }
+}
+
+@media (max-width: 280px) {
+    .card {
+        left: 11%;
+        right: 11%;
+    }
+}
