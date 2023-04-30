@@ -18,7 +18,7 @@ export const PasswordReset = (props) => {
             throw new Error("Email Can't Be Empty!");
         }
         try {
-            const response = await fetch("http://localhost:5000/resetPassword/getCode", {
+            const response = await fetch(`http://localhost:5000/resetPassword/getCode`, {
                 method: "POST",
                 headers: { "Content-Type" : "application/json" },
                 body: JSON.stringify({
@@ -38,9 +38,10 @@ export const PasswordReset = (props) => {
 
     const sendCodeHandler = async (event) => {
         event.preventDefault();
-        if(!code) {
-            throw new Error("Code Can't Be Null");
-        }
+        if(code.trim().length < 6 || code.trim().length > 6) {
+            const error = code.length < 6 ? "Code must be 6 digits" : "Code must not be more than 6 digits";
+            throw new Error(error);
+        };
         try {
             const response = await fetch(`http://localhost:5000/${retrievedUser.username}/password_reset`, {
                 method: "POST",
@@ -73,7 +74,7 @@ export const PasswordReset = (props) => {
                 {formSubmittion && <div>
                     <form onSubmit={sendCodeHandler}>
                         <label>Reset Password</label>
-                        <p>Welcome {retrievedUser.username}</p>
+                        {/* <p>Welcome {retrievedUser.username}</p> */}
                         <input type="text" placeholder="Enter Code" onChange={(e)=> setCode(e.target.value)}/>
                         <button type="submit">Change password</button>
                     </form>

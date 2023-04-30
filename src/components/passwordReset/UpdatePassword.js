@@ -13,7 +13,7 @@ export const UpdatePassword = props => {
         }
         //spinner
         try {
-            const response = await fetch(`http://localhost:5000/${props.user.username}/change-password`, {
+            const response = await fetch(`http://localhost:5000/${props.user.username}/change_password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

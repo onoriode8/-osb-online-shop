@@ -8,25 +8,29 @@ export const Authentication = () => {
     const [ password, setPassword ] = useState("");
     const [ error, setError ] = useState();
 
-    const loginHandler = (event) => { 
+    const loginHandler = async (event) => { 
         event.preventDefault();
         if(email.length === 0 && password.length === 0) {
             alert("Please fill in the form");
             return;
         };
-        fetch("http://localhost:5000", {
+        try {
+            const response = await fetch(`http://localhost:5000/authentication`, {
                 method: "POST",
                 headers: { "Content-Type" : "application/json" },
                 body: JSON.stringify({
                     email, password 
                 })
-            }).then(response => {
-                response.json();
-            }).then(data => {
-                alert("Login was successful"); 
-            }).catch(err => {
-                setError(err.message);
-            });
+            })
+            
+            const responseData = await response.json();
+            if(!response.ok) {
+                throw new Error(responseData);
+            };
+            alert("Login successful");
+        } catch(err) {
+            setError(err.message);
+        };
     };
 
     return (
