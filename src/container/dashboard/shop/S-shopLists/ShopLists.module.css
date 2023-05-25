@@ -1,0 +1,42 @@
+.card {
+    border: 1px solid #fff;
+    padding: 20px 1px;
+    background: #dfdfdf;
+    text-align: center;
+    width: 50vh;
+    height: 35vh;
+}
+
+.card2 {
+    border: 1px solid #fff;
+    padding: 20px 1px;
+    background: #dfdfdf;
+    text-align: center;
+    width: 50vh;
+    height: 35vh;
+}
+
+.card3 {
+    border: 1px solid #fff;
+    padding: 20px 1px;
+    background: #dfdfdf;
+    text-align: center;
+    width: 50vh;
+    height: 35vh;
+}
+
+@media(max-width: 500px) {
+    .card {
+        width: 770vh;
+        height: 20vh;
+        padding: 20px 1px;
+    }
+    .card2 {
+        width: 770vh;
+        height: 20vh;
+    }
+    .card3 {
+        width: 770vh;
+        height: 20vh;
+    }
+}

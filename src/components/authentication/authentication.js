@@ -44,6 +44,7 @@ export const Authentication = () => {
                            onChange={(event) => setPassword(event.target.value)} /><br />
                         <button type="submit">Login</button>
                         <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
+                        <NavLink to="/auth/admin/login">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
                     </form>
                 </div>
             </Card>

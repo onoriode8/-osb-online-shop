@@ -1,0 +1,22 @@
+.image {
+    width: 320px;
+    /* height: 38vh; */
+}
+
+.text {
+    font-size: 1.3em;
+}
+
+@media(max-width: 500px) {
+    .image {
+        width: 250px;
+        /* height: 30vh; */
+    }
+}
+
+@media(max-width: 500px) {
+    .image {
+        width: 165px;
+        /* height: 30vh; */
+    }
+}

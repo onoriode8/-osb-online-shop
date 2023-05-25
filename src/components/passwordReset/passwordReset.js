@@ -30,6 +30,7 @@ export const PasswordReset = (props) => {
                 throw new Error(responseData);
             };
             setFormSubmittion(true);
+            alert(responseData);
             setRetrievedUser(responseData);
         } catch(err) {
             setError(err.message); 
