@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SwitchComponent from "../switchComponent";
+
 
 const style={ 
     border: "1px solid grey",
@@ -12,7 +14,7 @@ const styles = {
     borderRadius: "1em"
 };
 function AddressOfCustomer() {
-    const [selectCity, setSelectCity] = useState();
+    const [selectCity, setSelectCity] = useState("");
 
     const selectCityHandler = event => {
         if(!event.target.value) {
@@ -22,13 +24,13 @@ function AddressOfCustomer() {
         setSelectCity(select);
     };
 
-        // console.log(selectCity); check if selectCity has a value then show other address based on the state choose
-
+   
     return (
         <header>
+           <label>Choose Your Location</label>
             <div style={style}>
                 <select style={styles} onChange={selectCityHandler}>
-                    <option value="Please Select">Please Select</option>
+                    <option value="Select State">Select State</option>
                     <option value="Alabama">Alabama</option>
                     <option value="Alaska">Alaska</option>
                     <option value="Arizona">Arizona</option>
@@ -81,6 +83,7 @@ function AddressOfCustomer() {
                     <option value="Wisconsin">Wisconsin</option>
                     <option value="Wyoming">Wyoming</option>
                 </select>
+                <SwitchComponent type={selectCity}/>
             </div>
         </header>
     )

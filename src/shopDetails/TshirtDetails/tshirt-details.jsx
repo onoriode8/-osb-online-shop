@@ -14,7 +14,12 @@ const TshirtDetails = props => {
     const addTshirtToCartHandler = async (event) => {
         event.preventDefault();
         try {
-           const info = { TshirtImage: TshirtImage, TshirtPrice: props.TshirtPrice };
+           const info = { 
+                TshirtImage: TshirtImage, 
+                TshirtPrice: props.TshirtPrice, 
+                deliveryLocation: props.location,
+                date: new Date().toString()
+            };
            const responseData = await axios.post(`${process.env.REACT_APP_AUTH} + /cart/t-shirt`, info,
              { headers: { "Content-Type" : "application/json" } }
            );
@@ -23,6 +28,8 @@ const TshirtDetails = props => {
             setError(err.message);
         }
     };
+
+    console.log("location testing", props.location);
 
     return (
     <React.Fragment> 
@@ -44,7 +51,6 @@ const TshirtDetails = props => {
             </form>
         </DetailsCard>
         <div>
-           <label>Choose Your Location</label>
            <AddressOfCustomer />
         </div>
         </div>
@@ -54,7 +60,8 @@ const TshirtDetails = props => {
 
 const mapStateToProps = state => {
     return {
-        TshirtPrice: state.shopListReducer.TshirtPrice
+        TshirtPrice: state.shopListReducer.TshirtPrice,
+        location: state.shopListReducer.location
     }
 };
 
