@@ -4,6 +4,7 @@ import { PasswordReset } from "./components/passwordReset/passwordReset";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Home } from "./container/Home/Home";
 import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
+import { Navigation } from "./Layouts/Navigation/Navigation";
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -34,12 +35,14 @@ function App() {
         <Redirect to="/auth" />
       </Switch>
   if(auth) {
-      user =
-      <Switch>
-          <Route path="/shop" exact component={Home} /> 
-          <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
-          <Redirect to="/shop" />
-      </Switch>
+      user = <header>
+            <Navigation />
+        <Switch>
+            <Route path="/shop" exact component={Home} /> 
+            <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
+            <Redirect to="/shop" />
+        </Switch>
+      </header>
   }
   
   return (

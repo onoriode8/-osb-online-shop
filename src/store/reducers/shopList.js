@@ -1,8 +1,13 @@
+
+
 const initialState = {
-    TshirtPrice: 8.50,
+    tshirtData: {
+        TshirtPrice: 8.50,
+        location: null,
+        tshirtCartQuanty: 0
+    },
     watchPrice: 15.99,
     shoePrice: 18.55,
-    location: null
 };
 
 //add a state update when they is a click to mutate the origin state and use the mutable one.
@@ -12,11 +17,16 @@ const shopListReducer = (state=initialState, action) => {
         case "LOCATION" :
             return {
                 ...state,
-                location: action.payload
+                location: state.tshirtData.location = action.payload
+            }
+        case("INCREMENT") : 
+            return {
+                ...state,
+                tshirtCartQuanty: state.tshirtData.tshirtCartQuanty += action.payload
             }
         default:
            return state;
     }
 }
 
-export default shopListReducer;
+export default shopListReducer;  

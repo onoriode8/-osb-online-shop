@@ -60,9 +60,9 @@ const TshirtDetails = props => {
 
 const mapStateToProps = state => {
     return {
-        TshirtPrice: state.shopListReducer.TshirtPrice,
-        location: state.shopListReducer.location
+        TshirtPrice: state.shopListReducer.tshirtData.TshirtPrice,
+        location: state.shopListReducer.tshirtData.location
     }
 };
 
-export default connect(mapStateToProps)(TshirtDetails);
+export default connect(mapStateToProps)(TshirtDetails); 

@@ -7,7 +7,14 @@ import { Provider } from "react-redux";
 import ShopListReducer from './store/reducers/shopList';
 import ShopReducer from './store/reducers/shop';
 
-const store = createStore(combineReducers({ shopListReducer: ShopListReducer, shopReducer: ShopReducer }));
+const rootReducer = combineReducers({ 
+    shopListReducer: ShopListReducer, 
+    shopReducer: ShopReducer 
+})
+
+const store = createStore(rootReducer);
+
+console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>

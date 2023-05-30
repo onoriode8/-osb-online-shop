@@ -1,0 +1,21 @@
+.nav {
+    background: orange; 
+    margin-top: 0px;
+    padding: 2px 0px;
+}
+
+.style {
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+    color:  #fff;
+    list-style: none;
+}
+
+.cartItem {
+    font-size: 12.5px;
+    box-sizing: border-box;
+    width: 9px;
+    border-radius: 9em;
+    border: 1px solid rgba(196, 124, 186, 0.486);
+}
