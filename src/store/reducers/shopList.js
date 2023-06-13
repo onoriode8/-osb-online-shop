@@ -24,6 +24,11 @@ const shopListReducer = (state=initialState, action) => {
                 ...state,
                 tshirtCartQuanty: state.tshirtData.tshirtCartQuanty += action.payload
             }
+        case("DECREMENT") :
+            return {
+                ...state,
+                tshirtCartQuanty: state.tshirtData.tshirtCartQuanty -= action.payload
+            }
         default:
            return state;
     }

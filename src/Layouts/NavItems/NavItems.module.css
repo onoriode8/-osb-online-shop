@@ -13,9 +13,13 @@
 }
 
 .cartItem {
+    display: flex;
+    justify-content: center;
+    background: rgb(255, 30, 0);
+    color: #fff;
     font-size: 12.5px;
     box-sizing: border-box;
-    width: 9px;
+    width: 17px;
     border-radius: 9em;
     border: 1px solid rgba(196, 124, 186, 0.486);
 }

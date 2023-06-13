@@ -1,40 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import TshirtImage from "../../assests/t-shirt.jpg";
 import DetailsCard from "../detailsCard/card";
 import classes from "./tshirt-details.module.css";
-import Button from "../../util/button/button";
+import Buttons from "../../util/button/button";
 import { connect } from "react-redux";
-import axios from "axios";
 import AddressOfCustomer from "../../container/customerUtility/addressOfCustomer/addressOfCustmer";
+import { AlarmModel } from "../../container/dashboard/shop/AlarmModel/alarmModel";
+import { Button } from "../../util/button/cartButton";
 
 const TshirtDetails = props => {
-    const [error, setError] = useState();
+    const [itemRemoveAlarm, setItemRemoveAlarm] = useState(false);
+    const [itemAddAlarm, setItemAddAlarm] = useState(false);
 
-    //work on this function when nodejs backend is ready
-    const addTshirtToCartHandler = async (event) => {
-        event.preventDefault();
-        try {
-           const info = { 
-                TshirtImage: TshirtImage, 
-                TshirtPrice: props.TshirtPrice, 
-                deliveryLocation: props.location,
-                date: new Date().toString()
-            };
-           const responseData = await axios.post(`${process.env.REACT_APP_AUTH} + /cart/t-shirt`, info,
-             { headers: { "Content-Type" : "application/json" } }
-           );
-           console.log(responseData)  //continue from here and build the other rest details items and add to cart logic
-        } catch(err) {
-            setError(err.message);
+    useEffect(() => {
+        //add the tshirtCartQuanty, tshirtImage and tshirtPrice to localStorage
+        if(props.tshirtCartQuanty === 1 && props.TshirtPrice === 8.50) {
+            const data = { TshirtPrice: props.TshirtPrice, 
+                TshirtImage, quantity: props.tshirtCartQuanty, location: props.location }
+            localStorage.setItem("cartItems", JSON.stringify([data]));
         }
-    };
+        if(props.tshirtCartQuanty > 1) {
+            JSON.parse(localStorage.getItem("cartItems"));
+        }
+    }, [props.tshirtCartQuanty, props.TshirtPrice, props.location]);
 
-    console.log("location testing", props.location);
+    const SubstractCartHandler = useCallback(() => {
+        props.decrement(); 
+            const parseData = JSON.parse(localStorage.getItem("cartItems"))
+            const data = parseData.splice(0, 1);
+            setItemRemoveAlarm(true);
+            setTimeout(() => {
+                setItemRemoveAlarm(false);
+            }, 1500);
+            if(props.tshirtCartQuanty === 0 || data.length === 1) {
+                parseData.splice(0, 1);
+                localStorage.setItem("cartItems", JSON.stringify([]));
+            }
+    }, [props]);
+
+    const AddTshirtToCartHandler = useCallback(() => {
+        props.increment();
+        setItemAddAlarm(true);
+            setTimeout(() => {
+                setItemAddAlarm(false);
+            }, 1500);
+       
+    }, [props]);
 
     return (
     <React.Fragment> 
-        {error && <p style={{textAlign: "center"}}>error occur</p>}
-        <div style={{display: "flex", justifyContent: "space-evenly"}}>
+        <AlarmModel itemRemoveAlarm={itemRemoveAlarm} itemAddAlarm={itemAddAlarm} />
+        <div style={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap"}}>
         <DetailsCard>
             <div style={{display: "flex", justifyContent: "space-evenly"}}>
                 <div>
@@ -44,11 +60,22 @@ const TshirtDetails = props => {
             </div>
             <div style={{display: "flex", justifyContent: "space-evenly"}}>
                 <div></div>
-                <label style={{fontFamily: "fantasy", marginTop: "-50px", fontSize: "2em"}}>${props.TshirtPrice}</label>
+                <label className={classes.tshirtPrice}>${props.TshirtPrice}</label>
             </div>
-            <form style={{textAlign: "center"}} onSubmit={addTshirtToCartHandler}>
-                <Button>ADD TO CART</Button>
-            </form>
+            {props.tshirtCartQuanty === 0 ? 
+            <div style={{textAlign: "center"}}>
+                {props.location === null ? <Buttons disabled={true}>ADD TO CART</Buttons> :
+                   <Buttons click={AddTshirtToCartHandler}>ADD TO CART</Buttons>}
+            </div>
+            :<div style={{display: "flex", justifyContent: "space-evenly"}}>
+            <Button clicked={SubstractCartHandler}>-</Button>
+            {props.tshirtCartQuanty > 0 ? <label>{props.tshirtCartQuanty}</label> : null }
+            {props.tshirtCartQuanty === 3 ? <Button disabled>+</Button> 
+            : 
+            <Button clicked={AddTshirtToCartHandler}>+</Button>}
+            </div>}
+            {props.tshirtCartQuanty > 0 ? <label className={classes.quantyDisplay}
+              >({props.tshirtCartQuanty} item(s) added)</label> : null}
         </DetailsCard>
         <div>
            <AddressOfCustomer />
@@ -61,8 +88,16 @@ const TshirtDetails = props => {
 const mapStateToProps = state => {
     return {
         TshirtPrice: state.shopListReducer.tshirtData.TshirtPrice,
+        tshirtCartQuanty: state.shopListReducer.tshirtData.tshirtCartQuanty,
         location: state.shopListReducer.tshirtData.location
     }
 };
 
-export default connect(mapStateToProps)(TshirtDetails); 
+const mapDispatchToProps = dispatch => {
+    return {
+        increment: () => dispatch({ type: "INCREMENT", payload: 1 }),
+        decrement: () => dispatch({ type: "DECREMENT", payload: 1 })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TshirtDetails); 

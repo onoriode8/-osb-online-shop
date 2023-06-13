@@ -1,14 +1,14 @@
 import classes from "./NavItems.module.css"
 
 
-export const NavItems = () => (
+export const NavItems = props => (
     <nav className={classes.nav}>
         <ul className={classes.style}>
             <li>Home</li>
             <li>
                 <div style={{display: "flex"}}>
                     <div>Cart</div>
-                    <div className={classes.cartItem}>3</div>
+                    {props.cartItems === 0 ? null : <div className={classes.cartItem}>{props.cartItems}</div>}
                 </div>
             </li>
             <li>Checkout</li>

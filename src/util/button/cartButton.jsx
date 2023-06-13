@@ -19,7 +19,7 @@ const styles={
 
 export const Button = (props) => (
     <div>
-        <button disabled={props.disabled}
+        <button onClick={props.clicked} disabled={props.disabled}
            type="submit" style={ props.disabled ? styles : style }
               >{props.children}</button>
     </div>

@@ -4,10 +4,15 @@ import { PasswordReset } from "./components/passwordReset/passwordReset";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Home } from "./container/Home/Home";
 import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
-import { Navigation } from "./Layouts/Navigation/Navigation";
+import Navigation from "./Layouts/Navigation/Navigation";
+import Bottom from "./Layouts/Bottom/Bottom";
+
 
 function App() {
   const [auth, setAuth] = useState(true);
+  const [carts, setCarts] = useState([]);
+
+  console.log("APP.JS")
 
   useEffect(() => {
     if(auth) {
@@ -27,13 +32,27 @@ function App() {
     login();
   });
 
+  useEffect(() => {
+    console.log("2ND USEEFFECT")
+    if(carts.length === 0) return
+    const cartData = JSON.parse(localStorage.getItem("cartItems"));
+    console.log("Before cartData 1st", cartData)
+    setCarts(cartData);
+    console.log("2nd cartData before if statement", cartData)
+  }, [carts]);
 
-  let user = 
-      <Switch>
-        <Route path="/auth" exact component={Authentication} />
-        <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
-        <Redirect to="/auth" />
-      </Switch>
+
+  console.log(carts);
+
+  let user = <header>
+          <Switch>
+            <Route path="/auth" exact component={Authentication} />
+            <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
+            <Redirect to="/auth" />
+          </Switch>
+          <Bottom />
+        </header>
+
   if(auth) {
       user = <header>
             <Navigation />
@@ -42,6 +61,7 @@ function App() {
             <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
             <Redirect to="/shop" />
         </Switch>
+        <Bottom />
       </header>
   }
   
