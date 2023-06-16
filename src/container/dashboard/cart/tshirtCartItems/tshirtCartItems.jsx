@@ -15,41 +15,29 @@ const TshirtCartItems = (props) => {
         //add the tshirtCartQuanty, tshirtImage and tshirtPrice to localStorage
         if(props.tshirtCartQuanty === 1 && props.TshirtPrice === 8.50) {
             const data = { TshirtPrice: props.TshirtPrice, TshirtImage, quantity: props.tshirtCartQuanty }
-            // console.log(data)
             localStorage.setItem("cartItems", JSON.stringify([data]));
         }
         if(props.tshirtCartQuanty > 1) {
-            const parse = JSON.parse(localStorage.getItem("cartItems"));
-            // const mapParseData = parse.reduce((accumulator, item) => {
-            //     return { ...item += 1 }
-            // }, props.tshirtCartQuanty);
-            console.log("parseDataFromTshirt", parse);
+            JSON.parse(localStorage.getItem("cartItems"));
         }
     }, [props.tshirtCartQuanty, props.TshirtPrice]);
 
 
     const SubstractCartHandler = useCallback(() => {
         props.decrement(); 
-        console.log("remove")
-        // useCallback(() => { 
             const parseData = JSON.parse(localStorage.getItem("cartItems"))
             const data = parseData.splice(0, 1);
             setItemRemoveAlarm(true);
             setTimeout(() => {
                 setItemRemoveAlarm(false);
             }, 1500);
-            // localStorage.setItem("cartItems", JSON.stringify([...data]));
             if(props.tshirtCartQuanty === 0 || data.length === 1) {
                 parseData.splice(0, 1);
                 localStorage.setItem("cartItems", JSON.stringify([]));
             }
-            console.log("worked")
-            console.log("quanty", props.tshirtCartQuanty)
-        // }, []);
     }, [props]);
 
     const AddTshirtToCartHandler = useCallback(() => {
-        // event.preventDefault();
         props.increment();  console.log("Clicked")
         setItemAddAlarm(true);
             setTimeout(() => {
@@ -76,7 +64,6 @@ const TshirtCartItems = (props) => {
                         <Button clicked={AddTshirtToCartHandler}>+</Button>}
                     </div>}
                     </div>
-                {/* </div> */}
         </React.Fragment>
     );
 }

@@ -6,7 +6,8 @@ import { Home } from "./container/Home/Home";
 import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
 import Navigation from "./Layouts/Navigation/Navigation";
 import Bottom from "./Layouts/Bottom/Bottom";
-
+import Cart from "./container/dashboard/cart/cart";
+import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tshirtCheckout"
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -59,6 +60,8 @@ function App() {
         <Switch>
             <Route path="/shop" exact component={Home} /> 
             <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
+            <Route path="/cart/all" exact component={Cart} />
+            <Route path="/:name/checkout/summary/place-order" exact component={TshirtCheckout} />
             <Redirect to="/shop" />
         </Switch>
         <Bottom />

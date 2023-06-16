@@ -1,7 +1,7 @@
 
 
 const bottom = () => (
-    <header style={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap"}}>
+    <header style={{display: "flex", margin: "5em 0em", justifyContent: "space-evenly", flexWrap: "wrap"}}>
         <div>About us
             <ul>
                <li>...</li> 

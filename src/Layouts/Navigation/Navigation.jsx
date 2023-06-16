@@ -23,6 +23,14 @@ const Navigation = (props) => {
         const parseItems = JSON.parse(items);
         // const newItem = {quantity: props.tshirtCartQuanty}
         const cartData = { TshirtPrice: props.TshirtPrice, TshirtImage, quantity: props.tshirtCartQuanty }
+        // if(props.tshirtCartQuanty > 0) {
+        //     const reduce = parseItems.reduce((accumulator, currentValue) => {
+        //         return accumulator + currentValue.quantity;
+        //     }, props.tshirtCartQuanty);
+        //     // localStorage.setItem("cartItems", JSON.stringify([...reduce]))
+        //     console.log("reduce", reduce);
+        //     return;
+        // }
         const finalItem = JSON.stringify([...parseItems, cartData]);
         localStorage.setItem("cartItems", finalItem);
         // const i = parseItems.push({newItem});

@@ -4,7 +4,8 @@ const initialState = {
     tshirtData: {
         TshirtPrice: 8.50,
         location: null,
-        tshirtCartQuanty: 0
+        tshirtCartQuanty: 0,
+        deliveryFee: 0.00
     },
     watchPrice: 15.99,
     shoePrice: 18.55,
