@@ -9,7 +9,8 @@ const TshirtCheckout = (props) => {
     const [inputAddress, setInputAddress] = useState();
     const [inputChange, setInputChange] = useState(true);
     const [cartData, setCartData] = useState([])
-    const [error, setError] = useState();
+    const [error, setError] = useState(null);
+    const [errorDisplay, setErrorDisplay] = useState(false);
     const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
@@ -33,6 +34,7 @@ const TshirtCheckout = (props) => {
     // add payment gateway e.g stripeJs to accept payment from customer card before booking delivery 
     const placeOrderOnTshirtHandler = async (event) => {
         event.preventDefault();
+        setSpinner(true);
         const data = {
             quantity: cartData.length,
             deliveryFee: props.deliveryFee,
@@ -40,12 +42,12 @@ const TshirtCheckout = (props) => {
             image: cartData[0].TshirtImage
         }
         try {
-            setSpinner(true);
             const response = await AxiosInstance.post("/${}/checkout/payment", data); //add user token to the url before sending to Nodejs backend
             console.log(response);  //continue from here and check if response contain data like fetch api
             setSpinner(false);
         } catch (err) {
             setSpinner(false)
+            setErrorDisplay(true);
             setError(err.message);
         }
     };
@@ -53,7 +55,8 @@ const TshirtCheckout = (props) => {
     return (
         <React.Fragment>
             <div>
-                <ErrorCard error={error} />  {/* add error card component to cancel error when pop up */}
+                <ErrorCard error={error} errorDisplay={errorDisplay}
+                 errorDisplayHandler={() => setErrorDisplay(false)} />  {/* add error card component to cancel error when pop up */}
             </div>
             <div style={{margin: "20px 0px"}}>
                <input style={{width: "23em"}} type="search" placeholder="Enter delivery Address..."
