@@ -4,6 +4,7 @@ import { AxiosInstance } from "../../axiosInstance/axiosInstance";
 import Card from "../../.././shopDetails/detailsCard/card";
 import Button from "../../../util/button/button";
 import ErrorCard from "../../../util/card/errorCard/errorCard";
+import { Spinner } from "../../../util/spinner/spinner";
 
 const TshirtCheckout = (props) => {
     const [inputAddress, setInputAddress] = useState();
@@ -54,11 +55,15 @@ const TshirtCheckout = (props) => {
 
     return (
         <React.Fragment>
+            {spinner && 
+            <div>
+                <Spinner />
+            </div>}
             <div>
                 <ErrorCard error={error} errorDisplay={errorDisplay}
                  errorDisplayHandler={() => setErrorDisplay(false)} />  {/* add error card component to cancel error when pop up */}
             </div>
-            <div style={{margin: "20px 0px"}}>
+            <div style={{marginTop: "5em"}}>
                <input style={{width: "23em"}} type="search" placeholder="Enter delivery Address..."
                  onChange={onInputHandler} />
             </div>

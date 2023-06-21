@@ -5,7 +5,7 @@ const style={
     color: "#fff",
     borderRadius: "2em",
     border: "1px solid #fff",
-    width: "12em",
+    width: "8em",
     height: "5vh"
 }
 

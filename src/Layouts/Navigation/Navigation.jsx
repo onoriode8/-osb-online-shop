@@ -6,6 +6,7 @@ import TshirtImage from "../../assests/t-shirt.jpg";
 
 const Navigation = (props) => {
     const [cartData, setCartData] = useState([]);
+    const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
         console.log("1ST USEEFFECT");
@@ -62,7 +63,9 @@ const Navigation = (props) => {
     return (
         <React.Fragment>
             <div>
-               <NavItems cartItems={cartData.length}/>
+               <NavItems cartItems={cartData.length} 
+                  showMenu={showMenu} setShowMenu={() => setShowMenu(!showMenu)}
+                  />
             </div>
         </React.Fragment>
     );

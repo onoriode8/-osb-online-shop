@@ -1,20 +1,17 @@
+import { useHistory } from "react-router-dom";
 import { TshirtOutput } from "./tshirtOutput/tshirtOutput";
+import Button from "../../../../../util/button/button";
 
-const tshirtDisplayCartItemAddedToLocalStorage = (props) => {
+const TshirtDisplayCartItemAddedToLocalStorage = (props) => {
+
+    const history = useHistory();
+
     let tshirtCartItems = 
-         <div>
+         <div style={{textAlign: "center"}}>
             <div>Nothing in Cart yet!</div> 
-            <div>Continue shopping.</div>
+            <Button click={() => history.push("/shop")}>Continue shopping.</Button>
          </div>;
     if(props.cartData.length !== 0) {
-        // return tshirtCartItems = props.cartData.map(items => {
-        //     return <TshirtOutput key={items.TshirtPrice} 
-        //        quantity={props.cartData} 
-        //        quanty={props.cartData.length}
-        //        tshirtImage={items.TshirtImage} 
-        //        tshirtPrice={items.TshirtPrice}
-        //     />
-        // })
         return tshirtCartItems = <TshirtOutput
                quantity={props.cartData} 
                quanty={props.cartData.length}
@@ -29,4 +26,4 @@ const tshirtDisplayCartItemAddedToLocalStorage = (props) => {
     )
 };
 
-export default tshirtDisplayCartItemAddedToLocalStorage;
+export default TshirtDisplayCartItemAddedToLocalStorage;

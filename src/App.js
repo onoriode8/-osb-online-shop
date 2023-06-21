@@ -7,7 +7,8 @@ import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
 import Navigation from "./Layouts/Navigation/Navigation";
 import Bottom from "./Layouts/Bottom/Bottom";
 import Cart from "./container/dashboard/cart/cart";
-import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tshirtCheckout"
+import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tshirtCheckout";
+import Order from "./components/Orders/Orders";
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -62,6 +63,7 @@ function App() {
             <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
             <Route path="/cart/all" exact component={Cart} />
             <Route path="/:name/checkout/summary/place-order" exact component={TshirtCheckout} />
+            <Route path="/all/:name/order" exact component={Order} />
             <Redirect to="/shop" />
         </Switch>
         <Bottom />
