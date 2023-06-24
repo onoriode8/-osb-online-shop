@@ -1,46 +1,46 @@
 import React, { useState, useEffect, useCallback } from "react";
-import TshirtImage from "../../assests/t-shirt.jpg";
+import bagImage from "../../assests/bag.jpg";
 import DetailsCard from "../detailsCard/card";
-import classes from "./tshirt-details.module.css";
+import classes from "./bag-details.module.css";
 import Buttons from "../../util/button/button";
 import { connect } from "react-redux";
 import AddressOfCustomer from "../../container/customerUtility/addressOfCustomer/addressOfCustmer";
 import { AlarmModel } from "../../container/dashboard/shop/AlarmModel/alarmModel";
 import { Button } from "../../util/button/cartButton";
-import * as shopListActionType from "../../store/actions/shopListsAction";
+import * as shopActionType from "../../store/actions/shopAction";
 
 
-const TshirtDetails = props => {
+const BagDetails = props => {
     const [itemRemoveAlarm, setItemRemoveAlarm] = useState(false);
     const [itemAddAlarm, setItemAddAlarm] = useState(false);
 
     useEffect(() => {
         //add the tshirtCartQuanty, tshirtImage and tshirtPrice to localStorage
-        if(props.tshirtCartQuanty === 1 && props.TshirtPrice === 8.50) {
-            const data = { TshirtPrice: props.TshirtPrice, 
-                TshirtImage, quantity: props.tshirtCartQuanty, location: props.location }
-            localStorage.setItem("cartItems", JSON.stringify([data]));
+        if(props.bagCartQuanty === 1 && props.bagPrice === 8.50) {
+            const data = { bagPrice: props.bagPrice, 
+                bagImage, quantity: props.bagCartQuanty, location: props.location }
+            localStorage.setItem("bagCartItems", JSON.stringify([data]));
         }
-        if(props.tshirtCartQuanty > 1) {
-            JSON.parse(localStorage.getItem("cartItems"));
+        if(props.bagCartQuanty > 1) {
+            JSON.parse(localStorage.getItem("bagCartItems"));
         }
-    }, [props.tshirtCartQuanty, props.TshirtPrice, props.location]);
+    }, [props.bagCartQuanty, props.bagPrice, props.location]);
 
     const SubstractCartHandler = useCallback(() => {
         props.decrement(); 
-            const parseData = JSON.parse(localStorage.getItem("cartItems"))
+            const parseData = JSON.parse(localStorage.getItem("bagCartItems"))
             const data = parseData.splice(0, 1);
             setItemRemoveAlarm(true);
             setTimeout(() => {
                 setItemRemoveAlarm(false);
             }, 1500);
-            if(props.tshirtCartQuanty === 0 || data.length === 1) {
+            if(props.bagCartQuanty === 0 || data.length === 1) {
                 parseData.splice(0, 1);
-                localStorage.setItem("cartItems", JSON.stringify([]));
+                localStorage.setItem("bagCartItems", JSON.stringify([]));
             }
     }, [props]);
 
-    const AddTshirtToCartHandler = useCallback(() => {
+    const AddBagToCartHandler = useCallback(() => {
         props.increment();
         setItemAddAlarm(true);
             setTimeout(() => {
@@ -56,28 +56,28 @@ const TshirtDetails = props => {
         <DetailsCard>
             <div style={{display: "flex", justifyContent: "space-evenly"}}>
                 <div>
-                <img className={classes.image} src={TshirtImage} alt="" />
+                <img className={classes.image} src={bagImage} alt="" />
                 </div>
-                <div className={classes.text}>Summer Men's Loose Short Sleeve Hawaii Beach Shirt - Grey</div>            
+                <div className={classes.text}>Smart bag Compatible - Black and white</div>            
             </div>
             <div style={{display: "flex", justifyContent: "space-evenly"}}>
                 <div></div>
-                <label className={classes.tshirtPrice}>${props.TshirtPrice}</label>
+                <label className={classes.tshirtPrice}>${props.bagPrice}</label>
             </div>
-            {props.tshirtCartQuanty === 0 ? 
+            {props.bagCartQuanty === 0 ? 
             <div style={{textAlign: "center"}}>
                 {props.location === null ? <Buttons disabled={true}>ADD TO CART</Buttons> :
-                   <Buttons click={AddTshirtToCartHandler}>ADD TO CART</Buttons>}
+                   <Buttons click={AddBagToCartHandler}>ADD TO CART</Buttons>}
             </div>
             :<div style={{display: "flex", justifyContent: "space-evenly"}}>
             <Button clicked={SubstractCartHandler}>-</Button>
-            {props.tshirtCartQuanty > 0 ? <label>{props.tshirtCartQuanty}</label> : null }
-            {props.tshirtCartQuanty === 3 ? <Button disabled>+</Button> 
+            {props.bagCartQuanty > 0 ? <label>{props.bagCartQuanty}</label> : null }
+            {props.bagCartQuanty === 3 ? <Button disabled>+</Button> 
             : 
-            <Button clicked={AddTshirtToCartHandler}>+</Button>}
+            <Button clicked={AddBagToCartHandler}>+</Button>}
             </div>}
-            {props.tshirtCartQuanty > 0 ? <label className={classes.quantyDisplay}
-              >({props.tshirtCartQuanty} item(s) added)</label> : null}
+            {props.bagCartQuanty > 0 ? <label className={classes.quantyDisplay}
+              >({props.bagCartQuanty} item(s) added)</label> : null}
         </DetailsCard>
         <div>
            <AddressOfCustomer />
@@ -89,17 +89,17 @@ const TshirtDetails = props => {
 
 const mapStateToProps = state => {
     return {
-        TshirtPrice: state.shopListReducer.tshirtData.TshirtPrice,
-        tshirtCartQuanty: state.shopListReducer.tshirtData.tshirtCartQuanty,
-        location: state.shopListReducer.location  //should be state.shopListReducer.tshirtData.location
+        bagPrice: state.shopReducer.bagData.bagPrice,
+        bagCartQuanty: state.shopReducer.bagData.bagCartQuanty,
+        location: state.shopReducer.location //should be state.shopReducer.bagData.location
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        increment: () => dispatch({ type: shopListActionType.TSHIRT_INCREMENT, payload: 1 }),
-        decrement: () => dispatch({ type: shopListActionType.TSHIRT_DECREMENT, payload: 1 })
+        increment: () => dispatch({ type: shopActionType.BAG_INCREMENT, payload: 1 }),
+        decrement: () => dispatch({ type: shopActionType.BAG_DECREMENT, payload: 1 })
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TshirtDetails); 
+export default connect(mapStateToProps, mapDispatchToProps)(BagDetails); 

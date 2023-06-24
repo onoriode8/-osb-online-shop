@@ -1,7 +1,6 @@
 import { useState, useEffect} from "react";
 import { connect } from "react-redux";
 
-
 const styles = {
     width: "160px", 
     padding: "10px", 
@@ -13,13 +12,14 @@ const styles = {
  const Alabama = (props) => {
     const [alabamaCity, setAlabamaCity] = useState();
 
-    // console.log(props.type)
+    console.log(props.type)
 
     useEffect(() => {
         if(!alabamaCity) {
            return;
         };
         const Location = { LocationState: props.type, LocationCity: alabamaCity };
+        console.log(Location);
         setTimeout(() => {
             props.location(Location);
         }, 1000);

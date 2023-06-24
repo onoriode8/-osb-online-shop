@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import bagImage from "../../../../assests/bag.jpg";
+// import bagImage from "../../../../assests/bag.jpg";
 import watch from "../../../../assests/watch.jpg";
 import shoe from "../../../../assests/shoe.jpg";
 import classes from "./shop.module.css";
 import { connect } from "react-redux";
+import BagCartItems from "../../cart/AllCartDisplay/bag/bagCartItems/bagCartItems";
 
 const Shop = props => {
     const [error, setError] = useState();
@@ -11,33 +12,33 @@ const Shop = props => {
     // const [watchPrice, setWatchPrice] = useState(15.99);
     // const [shoePrice, setShoePrice] = useState(18.55);
 
-    const addBagToCartHandler = async event => {
-        event.preventDefault();
-        try {
+    // const addBagToCartHandler = async event => {
+    //     event.preventDefault();
+    //     try {
             // setBagPrice(10.00);
         //    const formData = new FormData();
         //    formData.append("price", bagPrice);
         //    formData.append("image", shoe);
-           const response = await fetch(`${process.env.REACT_APP_AUTH} + /cart/bag`, {
-                // formData
-                method: "POST",
-                headers: { 
-                    "Content-Type" : "application/json",
-                    "Authorization" : "Bearer + " //Bearer + token
-                },
-                body: JSON.stringify({
-                    bagPrice: props.bagPrice, bagImage
-                })
-           });
-           const responseData = await response.json();
-           if(!response.ok) {
-                throw new Error();
-           }
-           alert("succeeded in adding to cart", responseData);
-        } catch(err) {
-            setError(err.message);
-        }
-    };
+        //    const response = await fetch(`${process.env.REACT_APP_AUTH} + /cart/bag`, {
+        //         // formData
+        //         method: "POST",
+        //         headers: { 
+        //             "Content-Type" : "application/json",
+        //             "Authorization" : "Bearer + " //Bearer + token
+        //         },
+        //         body: JSON.stringify({
+        //             bagPrice: props.bagPrice, bagImage
+        //         })
+        //    });
+        //    const responseData = await response.json();
+        //    if(!response.ok) {
+        //         throw new Error();
+    //        }
+    //        alert("succeeded in adding to cart", responseData);
+    //     } catch(err) {
+    //         setError(err.message);
+    //     }
+    // };
 
     const addWatchToCartHandler = async event => {
         event.preventDefault();
@@ -88,12 +89,13 @@ const Shop = props => {
             {error ? <div>{error}</div> : null}
             <div style={{display: "flex", justifyContent: "center"}}>
                 <div className={classes.card}>
-                    <form onSubmit={addBagToCartHandler}>
+                    <BagCartItems />
+                    {/* <form onSubmit={addBagToCartHandler}>
                         <img style={{width: "55%"}} src={bagImage} alt=""/>
                         <div>${props.bagPrice}</div>
                         <button type="submit" style={{borderRadius: "8px",
                             background: "orange", color: "#fff"}}>ADD TO CART</button>
-                    </form>
+                    </form> */}
                 </div>
                 <div className={classes.card2}>
                     <form onSubmit={addWatchToCartHandler}>

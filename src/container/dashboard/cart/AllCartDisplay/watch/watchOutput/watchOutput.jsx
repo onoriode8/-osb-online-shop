@@ -3,9 +3,9 @@ import Button from "../../../../../../util/button/button";
 import Card from "../../../../../../shopDetails/detailsCard/card"; 
 
 
-export const TshirtOutput = props => {
+export const WatchOutput = props => {
     const quantity = props.quantity.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.TshirtPrice;
+        return accumulator + currentValue.WatchPrice;
     }, 0);
 
     const history = useHistory();
@@ -13,10 +13,10 @@ export const TshirtOutput = props => {
     return (
         <Card>
         <div>
-            <img style={{width: "5em"}} src={props.tshirtImage} alt="" />
+            <img style={{width: "5em"}} src={props.watchImage} alt="" />
             <div style={{display: "flex"}}>
                 <div style={{fontSize: "1.2em"}}>price: </div>
-                <div style={{fontSize: "1.2em", fontFamily: "sans-serif"}}>${props.tshirtPrice}</div>  {/* fetch the tshirtPrice from our redux store  */}
+                <div style={{fontSize: "1.2em", fontFamily: "sans-serif"}}>${props.watchPrice}</div>  {/* fetch the tshirtPrice from our redux store  */}
             </div>  
             <div style={{display: "flex"}}>
                 <div style={{fontSize: "1.2em"}}>Quantity selected:</div> 
@@ -29,8 +29,8 @@ export const TshirtOutput = props => {
                 </div> 
             : null }
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                <Button click={() => localStorage.removeItem("cartItems")}>Remove</Button>
-                <Button click={() => history.push(`/$username-here/checkout/summary/place-order/tshirt`)}>Checkout</Button>
+                <Button click={() => localStorage.removeItem("watchCartItems")}>Remove</Button>
+                <Button click={() => history.push(`/$username-here/checkout/summary/place-order/watch`)}>Checkout</Button>
             </div>
         </div>
         </Card>

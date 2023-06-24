@@ -26,7 +26,7 @@ function AddressOfCustomer() {
 
    
     return (
-        <header>
+        <header style={{margin: "4em 0em"}}>
            <label>Choose Your Location</label>
             <div style={style}>
                 <select style={styles} onChange={selectCityHandler}>

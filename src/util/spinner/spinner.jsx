@@ -3,8 +3,8 @@ import classes from "./spinner.module.css";
 
 
 export const Spinner = () => (
-    <header style={{display: "flex"}}>
-      <div>Loading...</div>
-      <div className={classes}>spinner loading...</div>
+    <header style={{display: "block", marginTop: "4em"}}>
+      <div style={{color: "orange"}}>Loading...</div>
+      <div className={classes.loader}>Loading...</div>
     </header>
 );

@@ -13,13 +13,14 @@ const styles = {
  const Arkansas = (props) => {
     const [ArkansasCity, setArkansasCity] = useState();
 
-    // console.log(props.type)
+    console.log(props.type)
 
     useEffect(() => {
         if(!ArkansasCity) {
            return;
         };
         const Location = { LocationState: props.type, LocationCity: ArkansasCity };
+        console.log(Location)
         setTimeout(() => {
             props.location(Location);
         }, 1000);

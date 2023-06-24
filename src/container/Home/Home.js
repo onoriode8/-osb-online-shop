@@ -7,7 +7,7 @@ export const Home = () => {
         <React.Fragment>
             <div style={{marginTop: "5em"}}>
                 <Shop />
-                <ShopLists />
+                <ShopLists />  {/* working on this component  */}
             </div>
         </React.Fragment>
     );

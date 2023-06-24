@@ -7,8 +7,8 @@ const TshirtDisplayCartItemAddedToLocalStorage = (props) => {
     const history = useHistory();
 
     let tshirtCartItems = 
-         <div style={{textAlign: "center"}}>
-            <div>Nothing in Cart yet!</div> 
+         <div style={{textAlign: "center", marginTop: "4em"}}>
+            <div>Nothing in Tshirt Cart yet!</div> 
             <Button click={() => history.push("/shop")}>Continue shopping.</Button>
          </div>;
     if(props.cartData.length !== 0) {

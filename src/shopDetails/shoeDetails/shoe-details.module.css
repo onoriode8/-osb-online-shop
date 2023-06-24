@@ -1,0 +1,49 @@
+.image {
+    width: 320px;
+    /* height: 38vh; */
+}
+
+.text {
+    font-size: 1.3em;
+}
+
+.tshirtPrice {
+    position: relative; 
+    font-family: fantasy; 
+    left: 0.1em; 
+    margin-top: -50px; 
+    font-size: 2em
+}
+
+.quantyDisplay {
+   text-align: center; 
+   margin: 0px 30px;
+}
+
+@media(min-width: 500px) {
+    .image {
+        width: 250px;
+        /* height: 30vh; */
+    }
+    /* .tshirtPrice {
+        position: relative;
+    } */
+    .quantyDisplay {
+        text-align: center; 
+        margin: 0px 200px;
+     }
+}
+
+@media(max-width: 499px) {
+    .image {
+        width: 120px;
+        /* height: 30vh; */
+    }
+    /* .tshirtPrice {
+        position: relative;
+    } */
+    .quantyDisplay {
+        text-align: center; 
+        margin: 0px 30px;
+     }
+}

@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { AlarmModel } from "../../shop/AlarmModel/alarmModel";
 import TshirtImage from "../../../../assests/t-shirt.jpg";
 import { Button } from "../../../../util/button/cartButton"; 
-
+import * as shopListActionType from "../../../../store/actions/shopListsAction";
 
 const TshirtCartItems = (props) => {
     const [itemRemoveAlarm, setItemRemoveAlarm] = useState(false);
     const [itemAddAlarm, setItemAddAlarm] = useState(false);
 
     useEffect(() => {
-        console.log("useEffect runs in shopLists components");
         //add the tshirtCartQuanty, tshirtImage and tshirtPrice to localStorage
         if(props.tshirtCartQuanty === 1 && props.TshirtPrice === 8.50) {
             const data = { TshirtPrice: props.TshirtPrice, TshirtImage, quantity: props.tshirtCartQuanty }
@@ -21,7 +20,6 @@ const TshirtCartItems = (props) => {
             JSON.parse(localStorage.getItem("cartItems"));
         }
     }, [props.tshirtCartQuanty, props.TshirtPrice]);
-
 
     const SubstractCartHandler = useCallback(() => {
         props.decrement(); 
@@ -38,12 +36,11 @@ const TshirtCartItems = (props) => {
     }, [props]);
 
     const AddTshirtToCartHandler = useCallback(() => {
-        props.increment();  console.log("Clicked")
+        props.increment(); 
         setItemAddAlarm(true);
             setTimeout(() => {
                 setItemAddAlarm(false);
             }, 1500);
-       
     }, [props]);
 
     return (
@@ -77,8 +74,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        increment: () => dispatch({ type: "INCREMENT", payload: 1 }),
-        decrement: () => dispatch({ type: "DECREMENT", payload: 1 })
+        increment: () => dispatch({ type: shopListActionType.TSHIRT_INCREMENT, payload: 1 }),
+        decrement: () => dispatch({ type: shopListActionType.TSHIRT_DECREMENT, payload: 1 })
     }
 }
 

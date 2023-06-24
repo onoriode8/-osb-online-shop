@@ -13,7 +13,7 @@ const styles = {
  const Alaska = (props) => {
     const [AlaskaCity, setAlaskaCity] = useState();
 
-    // console.log(props.type)
+    console.log(props.type)
 
     useEffect(() => {
         if(!AlaskaCity) {

@@ -13,13 +13,14 @@ const styles = {
  const California = (props) => {
     const [CaliforniaCity, setCaliforniaCity] = useState();
 
-    // console.log(props.type)
+    console.log(props.type)
 
     useEffect(() => {
         if(!CaliforniaCity) {
            return;
         };
         const Location = { LocationState: props.type, LocationCity: CaliforniaCity };
+        console.log(Location)
         setTimeout(() => {
             props.location(Location);
         }, 1000);

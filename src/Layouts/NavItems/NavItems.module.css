@@ -17,6 +17,7 @@
     align-items:  center;
     color:  #fff;
     list-style: none;
+    cursor: pointer;
 }
 
 
@@ -68,7 +69,7 @@
     height: 100vh;
     position: fixed;
     left: 0;
-    z-index: 100;
+    z-index: 120;
     top: 0;
 }
 
@@ -79,6 +80,7 @@
     align-items:  center;
     color:  #fff;
     list-style: none;
+    cursor: pointer;
 }
 
 
