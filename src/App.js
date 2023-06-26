@@ -10,7 +10,7 @@ import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
 import WatchDetails from "./shopDetails/WatchDetails/watch-details";
 import ShoeDetails from "./shopDetails/shoeDetails/shoe-details";
 import Navigation from "./Layouts/Navigation/Navigation";
-import Bottom from "./Layouts/Bottom/Bottom";
+// import Bottom from "./Layouts/Bottom/Bottom";
 import Cart from "./container/dashboard/cart/cart";
 import PressingIronCheckout from "./components/allCheckoutComponent/pressingIronCheckout/pressingIronCheckout"
 import BlenderCheckout from "./components/allCheckoutComponent/blenderCheckout/blenderCheckout"
@@ -33,7 +33,7 @@ function App() {
             <Route path="/cart/all" exact component={Cart} /> */}
             <Redirect to="/auth" />
           </Switch>
-          <Bottom />
+          {/* <Bottom /> */}
         </header>
 
   if(auth) {
@@ -56,7 +56,7 @@ function App() {
             <Route path="/all/:name/order" exact component={Order} />
             <Redirect to="/shop" />
         </Switch>
-        <Bottom />
+        {/* <Bottom /> */}
       </header>
   }
   
