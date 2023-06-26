@@ -1,5 +1,5 @@
-// import * as shopActionType from "../actions/shopAction";
-import { LOCATION, BAG_INCREMENT, BAG_DECREMENT } from "../actions/shopAction";
+
+import * as shopActionType from "../actions/shopAction";
 
 
 const initialState= {
@@ -9,27 +9,56 @@ const initialState= {
         bagCartQuanty: 0,
         deliveryFee: 0.00
     },
-    watchPrice: 15.99,
-    shoePrice: 18.55
+    pressingIronData: {
+        pressingIronPrice: 6.57,
+        pressingIronCartQuanty: 0,
+        deliveryFee: 0.00
+    },
+    blenderData: {
+        blenderPrice: 19.75,
+        blenderCartQuanty: 0,
+        deliveryFee: 0.00
+    }
 };
 
 
 const shopReducer = (state=initialState, action) => {
     switch(action.type) {
-        case LOCATION :
+        case(shopActionType.LOCATION):
             return {
                 ...state,
                 location: state.location = action.payload
             }
-        case BAG_INCREMENT : 
+        case(shopActionType.BAG_INCREMENT): 
             return {
                 ...state,
                 bagCartQuanty: state.bagData.bagCartQuanty += action.payload
             }
-        case BAG_DECREMENT :
+        case(shopActionType.BAG_DECREMENT):
             return {
                 ...state,
                 bagCartQuanty: state.bagData.bagCartQuanty -= action.payload
+            }
+        case(shopActionType.PRESSING_IRON_INCREMENT): 
+            return {
+                ...state,
+                pressingIronCartQuanty: state.pressingIronData.pressingIronCartQuanty += action.payload
+            }
+        case(shopActionType.PRESSING_IRON_DECREMENT):
+            return {
+                ...state,
+                pressingIronCartQuanty: state.pressingIronData.pressingIronCartQuanty -= action.payload
+            }
+
+        case(shopActionType.BLENDER_INCREMENT): 
+            return {
+                ...state,
+                blenderCartQuanty: state.blenderData.blenderCartQuanty += action.payload
+            }
+        case(shopActionType.BLENDER_DECREMENT):
+            return {
+                ...state,
+                blenderCartQuanty: state.blenderData.blenderCartQuanty -= action.payload
             }
         default:
             return state;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { NavItems } from "../NavItems/NavItems";
+import pressingIronImage from "../../assests/pressing_iron.jpg";
+import blenderImage from "../../assests/blender.jpg"
 import bagImage from "../../assests/bag.jpg";
 import TshirtImage from "../../assests/t-shirt.jpg";
 import WatchImage from "../../assests/watch.jpg";
@@ -8,8 +10,10 @@ import shoeImage from "../../assests/shoe.jpg";
 
 const Navigation = (props) => {
     const [bagCartData, setBagCartData] = useState([]);
+    const [blenderCartData, setBlenderCartData] = useState([]);
     const [cartData, setCartData] = useState([]);
     const [watchCartData, setWatchCartData] = useState([]);
+    const [pressingIronCartData, setPressingIronCartData] = useState([]);
     const [shoeCartData, setShoeCartData] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
 
@@ -121,7 +125,6 @@ const Navigation = (props) => {
         const finalItem = JSON.stringify([...parseItems, bagCartData]);
         localStorage.setItem("bagCartItems", finalItem);
         const data = JSON.parse(localStorage.getItem("bagCartItems"));
-        // console.log(data)
         if(!data) {
             return
         };
@@ -133,9 +136,63 @@ const Navigation = (props) => {
         localStorage.setItem("bagCartItems", JSON.stringify(bagCartData));
       }, [bagCartData]);
 
-      // useEffect(() => {
-        //store all other quantity in localStorage as the logic above for tshirt cart one after the other
-    // })
+      //for pressingIron store cartItems localStorage 
+      useEffect(() => {
+        const parseData = JSON.parse(localStorage.getItem("pressingIronCartItems"));
+        if(parseData) {
+            return;
+        } 
+        const pressingIronCartData = [];
+        localStorage.setItem("pressingIronCartItems", JSON.stringify(pressingIronCartData));
+      }, []);
+
+    useEffect(() => {
+        if(props.pressingIronCartQuanty === 0) return;
+        const items = localStorage.getItem("pressingIronCartItems");
+        const parseItems = JSON.parse(items);
+        const pressingIronCartData = { pressingIronPrice: props.pressingIronPrice, pressingIronImage, quantity: props.pressingIronCartQuanty }
+        const finalItem = JSON.stringify([...parseItems, pressingIronCartData]);
+        localStorage.setItem("pressingIronCartItems", finalItem);
+        const data = JSON.parse(localStorage.getItem("pressingIronCartItems"));
+        if(!data) {
+            return
+        };
+        setPressingIronCartData(data);
+    }, [props.pressingIronCartQuanty, props.pressingIronPrice]);
+
+    useEffect(() => {
+        if(pressingIronCartData.length === 0) return;
+        localStorage.setItem("pressingIronCartItems", JSON.stringify(pressingIronCartData));
+      }, [pressingIronCartData]);
+
+    //for blender cartItems
+    useEffect(() => {
+        const parseData = JSON.parse(localStorage.getItem("blenderCartItems"));
+        if(parseData) {
+            return;
+        } 
+        const blenderCartData = [];
+        localStorage.setItem("blenderCartItems", JSON.stringify(blenderCartData));
+      }, []);
+
+    useEffect(() => {
+        if(props.blenderCartQuanty === 0) return;
+        const items = localStorage.getItem("blenderCartItems");
+        const parseItems = JSON.parse(items);
+        const blenderCartData = { blenderPrice: props.blenderPrice, blenderImage, quantity: props.blenderCartQuanty }
+        const finalItem = JSON.stringify([...parseItems, blenderCartData]);
+        localStorage.setItem("blenderCartItems", finalItem);
+        const data = JSON.parse(localStorage.getItem("blenderCartItems"));
+        if(!data) {
+            return
+        };
+        setBlenderCartData(data);
+    }, [props.blenderCartQuanty, props.blenderPrice]);
+
+    useEffect(() => {
+        if(blenderCartData.length === 0) return;
+        localStorage.setItem("blenderCartItems", JSON.stringify(blenderCartData));
+      }, [blenderCartData]);
 
     return (
         <React.Fragment>
@@ -144,7 +201,9 @@ const Navigation = (props) => {
                   cartItems={cartData.length} 
                   watchCartItems={watchCartData.length}
                   shoeCartItems={shoeCartData.length}
-                  bagCartItems={bagCartData.length}
+                  blenderCartItems={blenderCartData.length}
+                  pressingIronCartItems={pressingIronCartData.length} 
+                  bagCartItems={bagCartData.length} 
                   showMenu={showMenu} setShowMenu={() => setShowMenu(!showMenu)}
                   />
             </div>
@@ -156,7 +215,10 @@ const mapStateToProps = state => {
     return {
         bagCartQuanty: state.shopReducer.bagData.bagCartQuanty,
         bagPrice: state.shopReducer.bagData.bagPrice,
-
+        pressingIronCartQuanty: state.shopReducer.pressingIronData.pressingIronCartQuanty,
+        pressingIronPrice: state.shopReducer.pressingIronData.pressingIronPrice,
+        blenderCartQuanty: state.shopReducer.blenderData.blenderCartQuanty,
+        blenderPrice: state.shopReducer.blenderData.blenderPrice,
         //for shopListReducer reducer
         tshirtCartQuanty: state.shopListReducer.tshirtData.tshirtCartQuanty,
         TshirtPrice: state.shopListReducer.tshirtData.TshirtPrice,

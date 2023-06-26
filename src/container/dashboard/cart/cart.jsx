@@ -5,6 +5,8 @@ import Bag from "./AllCartDisplay/bag/bag";
 import Tshirt from "./AllCartDisplay/tshirt/tshirt";
 import Watch from "./AllCartDisplay/watch/watch";
 import Shoe from "./AllCartDisplay/shoe/shoe";
+import PressingIron from "./AllCartDisplay/pressingIron/pressingIron";
+import Blender from "./AllCartDisplay/blender/blender";
 
 // cart function to display all cart the user Added.
 
@@ -13,7 +15,8 @@ const DisplayAllCart = () => {
     const [watchCartData, setWatchCartData] = useState([]);
     const [shoeCartData, setShoeCartData] = useState([]);
     const [bagCartData, setBagCartData] = useState([]);
-
+    const [pressingIronCartData, setPressingIronCartData] = useState([]);
+    const [blenderCartData, setBlenderCartData] = useState([]);
 
     const history = useHistory();
 
@@ -49,7 +52,22 @@ const DisplayAllCart = () => {
         }
         setBagCartData(parseData);
     }, []);
+
+    useEffect(() => {
+        const parseData = JSON.parse(localStorage.getItem("pressingIronCartItems"));
+        if(!parseData) {
+            return;
+        }
+        setPressingIronCartData(parseData);
+    }, []);
     // get all other items from localstorage and map through them one after the other.
+    useEffect(() => {
+        const parseData = JSON.parse(localStorage.getItem("blenderCartItems"));
+        if(!parseData) {
+            return;
+        }
+        setBlenderCartData(parseData);
+    }, []);
     return (
         <React.Fragment>
             <div style={{marginTop: "4em", fontSize: "1.1em"}}>
@@ -59,6 +77,8 @@ const DisplayAllCart = () => {
             <Tshirt cartData={cartData} />
             <Watch cartData={watchCartData} />
             <Shoe cartData={shoeCartData} />
+            <PressingIron cartData={pressingIronCartData}/>
+            <Blender cartData={blenderCartData} />
         </React.Fragment>
     );
 };
