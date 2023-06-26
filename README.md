@@ -1,3 +1,4 @@
+online-shop and
 LoginForm Coded with MERN stack => MongoDB | Express Js | ReactJs | NodeJs
 
 Hosting Service 💻
@@ -10,10 +11,12 @@ Host Frontend with Netlify.
 website url ==>  https://benevolent-eclair-33dba6.netlify.app
 
 WHAT I LEARNED
-*React & React Hooks such as useState, useEffect, useRef
-*React icons
-*Nodejs and express RESTAPIs 
-*MVC pattern for clearer code and learnt middlewares
-*Connect to Mongodb database using mongoose
-*Learned jsonwebtoken (jwt)
-*learned the bcryptjs library for hashing password
+
+1) *React & React Hooks such as useState, useEffect, useRef, useCallback
+2) *Redux for state management
+3) *React icons
+4) *Nodejs and express RESTAPIs 
+5) *MVC pattern for clearner code and learnt middlewares
+6) *Connect to Mongodb database using mongoose
+7) *Learned jsonwebtoken (jwt)
+8) *learned the bcryptjs library for hashing password
