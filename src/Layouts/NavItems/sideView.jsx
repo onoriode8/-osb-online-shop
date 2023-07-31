@@ -1,0 +1,62 @@
+// import { NavLink, useHistory } from "react-router-dom";
+import { connect } from "react-redux"
+import classes from "./NavItems.module.css"
+import mylogo from "../../assests/mylogo.jpg";
+import { useHistory } from "react-router-dom";
+
+const SideView = props => {
+    const history = useHistory();
+    const logoutHandler = () => {
+        sessionStorage.removeItem("auth");
+        props.logoutUserHandler();
+        history.push("/auth");
+    };
+    return (
+        <div>
+        {props.showMenu && <nav className={classes.navMobile}> 
+        <div><img src={mylogo} alt="" style={{width: "3em", margin: "2em 10px"}}/></div>
+
+            <ul className={classes.styleMobile} onClick={props.setShowMenu}>
+                {props.activeHome ? <li className={classes.li} 
+                   style={props.activeStyle}>Home</li> : <li className={classes.li} onClick={props.activeHomeHandler}>Home</li>} 
+                {/* <li onClick={() => history.push("/shop")} style={{padding: "10px"}}>Home</li> */}
+                {props.activeCart ? <li className={classes.li} style={props.activeStyle}>
+                    {/* <NavLink to="/cart/all" style={{color: "#fff", listStyle: "none"}}> */}
+                    <div style={{display: "flex"}}>
+                        <div>Cart</div>
+                        {props.pressingIronCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.pressingIronCartItems}</div>}
+                        {props.blenderCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.blenderCartItems}</div>}
+                        {props.bagCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.bagCartItems}</div>}
+                        {props.cartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.cartItems}</div>}
+                        {props.watchCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.watchCartItems}</div>}
+                        {props.shoeCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.shoeCartItems}</div>}
+                    </div>
+                </li> : <li className={classes.li} onClick={props.activeCartHandler}>Cart</li>}
+                {props.activeOrder ? <li className={classes.li}
+                   style={props.activeStyle}>Order</li> : <li className={classes.li} onClick={props.activeOrderHandler}>Order</li>}
+                {props.token ? null : <li className={classes.li} onClick={props.activeLoginHandler}>Login</li>}
+                {props.token ? <li className={classes.li} onClick={logoutHandler}>Logout</li> : null}
+                {/* <li onClick={() => history.push("/all/:name/order")} style={{padding: "10px"}}>Order</li> */}
+                {/*<li onClick={() => history.push("/auth")}>Login</li> {/* add user id and token when user authenticate */}
+            </ul>
+        </nav>}
+        </div>
+    );
+};
+
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.token,
+        email: state.authReducer.email
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        logoutUserHandler: () => dispatch(
+            {type: "LOGOUT", payload: {
+                id: null,token: null,email: null,username: null
+            }})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideView); 

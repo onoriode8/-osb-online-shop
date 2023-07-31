@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Authentication } from "./components/authentication/authentication";
+import React, { useState, useContext, useEffect } from "react";
+import { connect } from "react-redux";
+import Authentication  from "./components/authentication/authentication";
+import SignUp  from "./components/authentication/signup-authentication"
 import { PasswordReset } from "./components/passwordReset/passwordReset";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Home } from "./container/Home/Home";
@@ -19,24 +21,47 @@ import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tsh
 import WatchCheckout from "./components/allCheckoutComponent/watchCheckout/watchCheckout";
 import ShoeCheckout from "./components/allCheckoutComponent/shoeCheckout/shoeCheckout";
 import Order from "./components/Orders/Orders";
+import { AuthContext } from "./hooks/auth-context";
+import AuthContextProvider from "./hooks/auth-context";
 
-function App() {
-  const [auth] = useState(true);
+function App(props) {
+  const [dataToken, setDataToken] = useState(null);
+  const [userId, setUserId] = useState(null);
+  // const [email, setEmail] = useState(null);
+  // const [username, setUsername] = useState(null);
+
+  const context = useContext(AuthContext);
+
+  console.log("context from App", context);
+
+  useEffect(() => {
+    // sessionStorage.removeItem("auth")
+      const parseData = sessionStorage.getItem("auth");
+      const dataParsed = JSON.parse(parseData);
+      if(!dataParsed) return;
+      console.log("useEffect from App", dataParsed);
+      setDataToken(dataParsed.token); setUserId(dataParsed.id);
+      // setEmail(dataParsed.email); setUsername(dataParsed.username);
+      props.retirevedDataHandler(dataParsed.token, dataParsed.email, dataParsed.userId, dataParsed.username);
+  }, [props]);
+
+  console.log("from redux authreducer", props);
   
   let user = <header>
           <Switch>
             <Route path="/auth" exact component={Authentication} />
+            <Route path="/auth/signup" exact component={SignUp} />
             <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
-            {/* <Route path="/shop" exact component={Home} /> 
-            <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
+            <Route path="/shop" exact component={Home} /> 
+            {/* <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
             <Route path="/shop/watch/details" exact component={WatchDetails} />
-            <Route path="/cart/all" exact component={Cart} /> */}
+            <Route path="/cart/all" exact component={Cart} /> */} 
             <Redirect to="/auth" />
           </Switch>
           {/* <Bottom /> */}
         </header>
 
-  if(auth) {
+  if(props.authentication || props.token || dataToken || userId) {
       user = <header>
         <Switch>
             <Route path="/shop" exact component={Home} /> 
@@ -63,9 +88,25 @@ function App() {
   return (
     <React.Fragment>
         <Navigation />
-        {user}
+        <AuthContextProvider> 
+          {user}
+        </AuthContextProvider>
     </React.Fragment>
   );
+};
+
+const mapStateToProps = state => {
+  return {
+    authentication: state.authReducer.authentication,
+    token: state.authReducer.token
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    retirevedDataHandler: (token, email, id, username) => dispatch(
+       { type: "LOGIN", payload: {id: id, email: email, token: token, username: username} })
+  }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

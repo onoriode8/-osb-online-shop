@@ -83,6 +83,10 @@
     cursor: pointer;
 }
 
+.li {
+    margin: 6px 0px;
+}
+
 
 .cartItemMobile {
     display: flex;

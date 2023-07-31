@@ -5,7 +5,7 @@ import ShopLists  from "../dashboard/shop/S-shopLists/shopLists";
 export const Home = () => {
     return (
         <React.Fragment>
-            <div style={{marginTop: "5em"}}>
+            <div style={{marginTop: "4em"}}>
                 <Shop />
                 <ShopLists />  {/* working on this component  */}
             </div>

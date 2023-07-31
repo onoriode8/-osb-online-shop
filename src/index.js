@@ -6,10 +6,13 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import ShopListReducer from './store/reducers/shopList';
 import ShopReducer from './store/reducers/shop';
+import authReducer from './store/reducers/auth-reducer';
+
 
 const rootReducer = combineReducers({ 
     shopListReducer: ShopListReducer, 
-    shopReducer: ShopReducer 
+    shopReducer: ShopReducer,
+    authReducer: authReducer
 })
 
 const store = createStore(rootReducer);

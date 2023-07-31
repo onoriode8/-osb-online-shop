@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { NavItems } from "../NavItems/NavItems";
+import NavItems from "../NavItems/NavItems";
 import pressingIronImage from "../../assests/pressing_iron.jpg";
 import blenderImage from "../../assests/blender.jpg"
 import bagImage from "../../assests/bag.jpg";

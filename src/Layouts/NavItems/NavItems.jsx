@@ -1,58 +1,90 @@
-import classes from "./NavItems.module.css"
-import { NavLink, useHistory } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import mylogo from "../../assests/mylogo.jpg";
+import { useState } from "react";
+// import classes from "./NavItems.module.css"
+import { useHistory } from "react-router-dom";
+// import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+// import mylogo from "../../assests/mylogo.jpg";
+import SideView from "./sideView";
+import FullView from "./fullView";
+import { connect } from "react-redux";
 
+const activeStyle = {
+    color: "#fff",
+    padding: "3px 6px",
+    background: "#60f384"
+}
 
-export const NavItems = props => {
+const NavItems = props => {
+    const [activeHome, setActiveHome] = useState(false);
+    const [activeCart, setActiveCart] = useState(false);
+    const [activeOrder, setActiveOrder] = useState(false);
+    const [activeLogin, setActiveLogin] = useState(false);
+
     const history = useHistory();
+    const activeCartHandler = () => {
+        setActiveHome(false);
+        setActiveLogin(false);
+        setActiveOrder(false);
+        setActiveCart(true);
+        history.push("/cart/all");
+    };
+    const activeOrderHandler = () => {
+        setActiveHome(false);
+        setActiveLogin(false);
+        setActiveCart(false);
+        setActiveOrder(true);
+        history.push(`/all/${props.username}/order`); //before  "/all/:name/order"
+    };
+    const activeLoginHandler = () => {
+        setActiveHome(false);
+        setActiveOrder(false);
+        setActiveCart(false);
+        setActiveLogin(true);
+        history.push("/auth");
+    };
+    const activeHomeHandler = () => {
+        setActiveLogin(false);
+        setActiveOrder(false);
+        setActiveCart(false);
+        setActiveHome(true) 
+        history.push("/shop")
+    };
     return (
     <div>
         {/*  Desktop view size */}
-        <div className={classes.MENU}>
-          <div style={{display: "flex"}}>
-             <div onClick={props.setShowMenu}><AiOutlineMenu style={{fontSize: "1.5em", marginRight: "2em"}} /></div>
-             <div><img src={mylogo} alt="" style={{width: "1.8em"}}/></div>
-          </div>
-           {props.showMenu && <div onClick={props.setShowMenu}><AiOutlineClose style={{fontSize: "2em"}} /></div>}
-        </div>
-        <nav className={classes.nav}>
-            <ul className={classes.style}>
-                <li onClick={() => history.push("/shop")}>Home</li>
-                <li><NavLink to="/cart/all" style={{color: "#fff", listStyle: "none"}}>
-                    <div style={{display: "flex"}}>
-                        <div>Cart</div>
-                        {props.pressingIronCartItems === 0 ? null : <div className={classes.cartItem}>{props.pressingIronCartItems}</div>}
-                        {props.blenderCartItems === 0 ? null : <div className={classes.cartItem}>{props.blenderCartItems}</div>}
-                        {props.bagCartItems === 0 ? null : <div className={classes.cartItem}>{props.bagCartItems}</div>}
-                        {props.cartItems === 0 ? null : <div className={classes.cartItem}>{props.cartItems}</div>}
-                        {props.watchCartItems === 0 ? null : <div className={classes.cartItem}>{props.watchCartItems}</div>}
-                        {props.shoeCartItems === 0 ? null : <div className={classes.cartItem}>{props.shoeCartItems}</div>}
-                    </div>
-                </NavLink></li>
-                <li onClick={() => history.push("/all/:name/order")}>Order</li>
-            </ul>
-        </nav>
+       <FullView 
+       showMenu={props.showMenu} setShowMenu={props.setShowMenu}
+       pressingIronCartItems={props.pressingIronCartItems}
+       blenderCartItems={props.blenderCartItems}
+       bagCartItems={props.bagCartItems}
+       cartItems={props.cartItems}
+       watchCartItems={props.watchCartItems}
+       shoeCartItems={props.shoeCartItems} activeStyle={activeStyle}
+       activeHomeHandler={activeHomeHandler} activeCartHandler={activeCartHandler}
+       activeLoginHandler={activeLoginHandler} activeOrderHandler={activeOrderHandler}
+       activeCart={activeCart} activeHome={activeHome} activeLogin={activeLogin} activeOrder={activeOrder}
+       />
 
     {/* Mobile view size below */}
-        {props.showMenu && <nav className={classes.navMobile}> 
-        <div><img src={mylogo} alt="" style={{width: "3em", margin: "2em 10px"}}/></div>
-
-            <ul className={classes.styleMobile} onClick={props.setShowMenu}>
-                <li onClick={() => history.push("/shop")} style={{padding: "10px"}}>Home</li>
-                <li><NavLink to="/cart/all" style={{color: "#fff", listStyle: "none"}}>
-                    <div style={{display: "flex"}}>
-                        <div>Cart</div>
-                        {props.pressingIronCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.pressingIronCartItems}</div>}
-                        {props.blenderCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.blenderCartItems}</div>}
-                        {props.bagCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.bagCartItems}</div>}
-                        {props.cartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.cartItems}</div>}
-                        {props.watchCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.watchCartItems}</div>}
-                        {props.shoeCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.shoeCartItems}</div>}
-                    </div>
-                </NavLink></li>
-                <li onClick={() => history.push("/all/:name/order")} style={{padding: "10px"}}>Order</li>
-            </ul>
-        </nav>}
+        <SideView showMenu={props.showMenu} setShowMenu={props.setShowMenu}
+          pressingIronCartItems={props.pressingIronCartItems}
+          blenderCartItems={props.blenderCartItems}
+          bagCartItems={props.bagCartItems}
+          cartItems={props.cartItems}
+          watchCartItems={props.watchCartItems}
+          shoeCartItems={props.shoeCartItems} activeStyle={activeStyle}
+          activeHomeHandler={activeHomeHandler} activeCartHandler={activeCartHandler}
+          activeLoginHandler={activeLoginHandler} activeOrderHandler={activeOrderHandler}
+          activeCart={activeCart} activeHome={activeHome} activeLogin={activeLogin} activeOrder={activeOrder}
+        />
     </div>
 )};
+
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.username
+        // 
+    }
+}
+
+
+export default NavItems;
