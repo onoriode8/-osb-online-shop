@@ -53,9 +53,13 @@ function App(props) {
             <Route path="/auth/signup" exact component={SignUp} />
             <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
             <Route path="/shop" exact component={Home} /> 
-            {/* <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
+            <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
             <Route path="/shop/watch/details" exact component={WatchDetails} />
-            <Route path="/cart/all" exact component={Cart} /> */} 
+            <Route path="/shop/shoe/details" exact component={ShoeDetails} />
+            <Route path="/shop/bag/details" exact component={BagDetails} />
+            <Route path="/shop/pressingIron/details" exact component={PressingIronDetails} />
+            <Route path="/shop/blender/details" exact component={BlenderDetails} />
+            <Route path="/cart/all" exact component={Cart} />  
             <Redirect to="/auth" />
           </Switch>
           {/* <Bottom /> */}
