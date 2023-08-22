@@ -1,4 +1,4 @@
-import { WatchOutput } from "./watchOutput/watchOutput";
+import WatchOutput from "./watchOutput/watchOutput";
 
 const WatchDisplayCartItemAddedToLocalStorage = (props) => {
     return (

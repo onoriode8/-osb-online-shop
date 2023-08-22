@@ -41,11 +41,11 @@ function App(props) {
       if(!dataParsed) return;
       console.log("useEffect from App", dataParsed);
       setDataToken(dataParsed.token); setUserId(dataParsed.id);
-      // setEmail(dataParsed.email); setUsername(dataParsed.username);
-      props.retirevedDataHandler(dataParsed.token, dataParsed.email, dataParsed.userId, dataParsed.username);
+      //setUsername(dataParsed.username); // setEmail(dataParsed.email); 
+      props.retrievedDataHandler(dataParsed.token, dataParsed.email, dataParsed.userId, dataParsed.username);
   }, [props]);
 
-  console.log("from redux authreducer", props);
+  // console.log("from redux authreducer", props);
   
   let user = <header>
           <Switch>
@@ -76,13 +76,13 @@ function App(props) {
             <Route path="/shop/watch/details" exact component={WatchDetails} />
             <Route path="/shop/shoe/details" exact component={ShoeDetails} />
             <Route path="/cart/all" exact component={Cart} />
-            <Route path="/:name/checkout/summary/place-order/bag" exact component={BagCheckout} />
-            <Route path="/:name/checkout/summary/place-order/pressingIron" exact component={PressingIronCheckout} />
-            <Route path="/:name/checkout/summary/place-order/blender" exact component={BlenderCheckout} />
-            <Route path="/:name/checkout/summary/place-order/tshirt" exact component={TshirtCheckout} />
-            <Route path="/:name/checkout/summary/place-order/watch" exact component={WatchCheckout} />
-            <Route path="/:name/checkout/summary/place-order/shoe" exact component={ShoeCheckout} />
-            <Route path="/all/:name/order" exact component={Order} />
+            <Route path={`/${props.username}/checkout/summary/place-order/bag`} exact component={BagCheckout} />
+            <Route path={`/${props.username}/checkout/summary/place-order/pressingIron`} exact component={PressingIronCheckout} />
+            <Route path={`/${props.username}/checkout/summary/place-order/blender`} exact component={BlenderCheckout} />
+            <Route path={`/${props.username}/checkout/summary/place-order/tshirt`} exact component={TshirtCheckout} />
+            <Route path={`/${props.username}/checkout/summary/place-order/watch`} exact component={WatchCheckout} />
+            <Route path={`/${props.username}/checkout/summary/place-order/shoe`} exact component={ShoeCheckout} />
+            <Route path={`/all/${props.username}/order`} exact component={Order} />
             <Redirect to="/shop" />
         </Switch>
         {/* <Bottom /> */}
@@ -102,13 +102,14 @@ function App(props) {
 const mapStateToProps = state => {
   return {
     authentication: state.authReducer.authentication,
-    token: state.authReducer.token
+    token: state.authReducer.token,
+    username: state.authReducer.username
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    retirevedDataHandler: (token, email, id, username) => dispatch(
+    retrievedDataHandler: (token, email, id, username) => dispatch(
        { type: "LOGIN", payload: {id: id, email: email, token: token, username: username} })
   }
 }

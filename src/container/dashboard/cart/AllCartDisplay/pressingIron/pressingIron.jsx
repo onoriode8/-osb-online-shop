@@ -1,4 +1,4 @@
-import { PressingIronOutput } from "./pressingIronOutput/pressingIronOutput";
+import PressingIronOutput from "./pressingIronOutput/pressingIronOutput";
 
 const pressingIronDisplayCartItemAddedToLocalStorage = (props) => {
     return (

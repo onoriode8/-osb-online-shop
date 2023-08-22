@@ -1,4 +1,4 @@
-import { BagOutput } from "./bagOutput/bagOutput";
+import BagOutput from "./bagOutput/bagOutput";
 
 const bagDisplayCartItemAddedToLocalStorage = (props) => {
     return (

@@ -1,4 +1,4 @@
-import { BlenderOutput } from "./blenderOutput/blenderOutput";
+import BlenderOutput from "./blenderOutput/blenderOutput";
 
 const blenderDisplayCartItemAddedToLocalStorage = (props) => {
     return (

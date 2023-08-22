@@ -1,9 +1,10 @@
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import Button from "../../../../../../util/button/button";
 import Card from "../../../../../../shopDetails/detailsCard/card"; 
 
 
-export const BagOutput = props => {
+const BagOutput = props => {
     const quantity = props.quantity.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.bagPrice;
     }, 0);
@@ -30,11 +31,19 @@ export const BagOutput = props => {
             : null }
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <Button click={() => localStorage.removeItem("shoeCartItems")}>Remove</Button>
-                <Button click={() => history.push(`/$username-here/checkout/summary/place-order/bag`)}>Checkout</Button>
+                <Button click={() => history.push(`/${props.username}/checkout/summary/place-order/bag`)}>Checkout</Button>
             </div>
         </div>
         </Card>
     );
 };
+
+const mapStateToProps = state => {
+    return {
+        username: state.authReducer.username
+    }
+};
+
+export default connect(mapStateToProps)(BagOutput);
 
 // fetch username from backend when user signin and display name on the button to checkout/summary

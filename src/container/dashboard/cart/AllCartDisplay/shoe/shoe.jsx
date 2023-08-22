@@ -1,4 +1,4 @@
-import { ShoeOutput } from "./shoeOutput/shoeOutput";
+import ShoeOutput from "./shoeOutput/shoeOutput";
 
 const shoeDisplayCartItemAddedToLocalStorage = (props) => {
     return (
@@ -10,7 +10,7 @@ const shoeDisplayCartItemAddedToLocalStorage = (props) => {
                shoePrice={props.cartData[0].shoePrice}
             />: null}
         </div>
-    )
+    );
 };
 
 export default shoeDisplayCartItemAddedToLocalStorage;

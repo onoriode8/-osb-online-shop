@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 // import mylogo from "../../assests/mylogo.jpg";
 import SideView from "./sideView";
 import FullView from "./fullView";
-// import { connect } from "react-redux"; check later
+import { connect } from "react-redux"; // check later
 
 const activeStyle = {
     color: "#fff",
@@ -79,12 +79,12 @@ const NavItems = props => {
     </div>
 )};
 
-// const mapStateToProps = state => {
-//     return {
-//         token: state.authReducer.username
-//         // 
-//     }
-// } check later as well as above. 
+const mapStateToProps = state => {
+    return {
+        username: state.authReducer.username
+        // 
+    }
+} //check later as well as above. 
 
 
-export default NavItems;
+export default connect(mapStateToProps)(NavItems);

@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { TshirtOutput } from "./tshirtOutput/tshirtOutput";
+import TshirtOutput from "./tshirtOutput/tshirtOutput";
 import Button from "../../../../../util/button/button";
 
 const TshirtDisplayCartItemAddedToLocalStorage = (props) => {
