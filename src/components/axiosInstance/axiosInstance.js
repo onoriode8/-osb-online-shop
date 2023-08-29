@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const AxiosInstance = axios.create({
+export const AxiosInstance = axios.create({  //worked on the export and bearer below later
     baseURL: process.env.REACT_APP_AUTH,
     headers: {
         "Content-Type" : "application/json",

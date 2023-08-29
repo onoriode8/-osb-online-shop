@@ -5,6 +5,7 @@ const initialState = {
     token: null,
     email: null,
     username: null,
+    image: null
 };
 
 const authReducer = (state=initialState, action) => {
@@ -17,6 +18,7 @@ const authReducer = (state=initialState, action) => {
                 token: action.payload.token,
                 email: action.payload.email,
                 username: action.payload.username,
+                image: action.payload.image 
             }
         case("SIGNIN"):
             return {
@@ -26,6 +28,7 @@ const authReducer = (state=initialState, action) => {
                 token: action.payload.token,
                 email: action.payload.email,
                 username: action.payload.username,
+                image: action.payload.image 
             }
         case("LOGOUT"):
             return {
@@ -35,6 +38,7 @@ const authReducer = (state=initialState, action) => {
                 token: action.payload.token,
                 email: action.payload.email,
                 username: action.payload.username,
+                image: action.payload.image 
             }
         default :
             return state;

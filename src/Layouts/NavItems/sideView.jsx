@@ -1,5 +1,7 @@
 // import { NavLink, useHistory } from "react-router-dom";
 import { connect } from "react-redux"
+import { AiOutlinePoweroff } from "react-icons/ai";
+// import { RiArrowDropDownLine } from "react-icons/ri";
 import classes from "./NavItems.module.css"
 import mylogo from "../../assests/mylogo.jpg";
 import { useHistory } from "react-router-dom";
@@ -35,7 +37,22 @@ const SideView = props => {
                 {props.activeOrder ? <li className={classes.li}
                    style={props.activeStyle}>Order</li> : <li className={classes.li} onClick={props.activeOrderHandler}>Order</li>}
                 {props.token ? null : <li className={classes.li} onClick={props.activeLoginHandler}>Login</li>}
-                {props.token ? <li className={classes.li} onClick={logoutHandler}>Logout</li> : null}
+                {/* {props.token ? <li className={classes.li} onClick={logoutHandler}>Logout</li> : null} */}
+                {props.token && 
+                   <div className={classes.li} style={{display: "flex"}} >
+                      <li style={{ margin: "0px 0px"}}>Settings</li> 
+                      {/* <li><RiArrowDropDownLine /></li> */}
+                    </div>}
+                    {/* {props.showDropdown &&
+                      <ul>
+                        <li>Account Settings</li>
+                      </ul>} */}
+                    <br /><br />
+                {props.token &&
+                   <div style={{display: "flex"}}>
+                       <AiOutlinePoweroff style={{ margin: "0px 4px"}} />
+                       <li onClick={logoutHandler}>Logout</li> 
+                    </div>}
                 {/* <li onClick={() => history.push("/all/:name/order")} style={{padding: "10px"}}>Order</li> */}
                 {/*<li onClick={() => history.push("/auth")}>Login</li> {/* add user id and token when user authenticate */}
             </ul>
@@ -54,7 +71,7 @@ const mapDispatchToProps = dispatch => {
     return {
         logoutUserHandler: () => dispatch(
             {type: "LOGOUT", payload: {
-                id: null,token: null,email: null,username: null
+                id: null,token: null,email: null,username: null, image: null
             }})
     }
 }

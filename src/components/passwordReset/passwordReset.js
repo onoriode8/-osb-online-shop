@@ -18,7 +18,7 @@ export const PasswordReset = (props) => {
             throw new Error("Email Can't Be Empty!");
         }
         try {
-            const response = await fetch(`http://localhost:5000/resetPassword/getCode`, {
+            const response = await fetch(`${process.env.REACT_APP_AUTH}/resetPassword/getCode`, {
                 method: "POST",
                 headers: { "Content-Type" : "application/json" },
                 body: JSON.stringify({
@@ -44,7 +44,7 @@ export const PasswordReset = (props) => {
             throw new Error(error);
         };
         try {
-            const response = await fetch(`http://localhost:5000/${retrievedUser.username}/password_reset`, {
+            const response = await fetch(`${process.env.REACT_APP_AUTH}/${retrievedUser.username}/password_reset`, {
                 method: "POST",
                 headers: { "Content-Type" : "application/json" },
                 body: JSON.stringify({
@@ -66,17 +66,17 @@ export const PasswordReset = (props) => {
             <Card displayProps={error !== null ? error : "Reset Password"}>
                 {!formSubmittion && <div>
                     <form onSubmit={getCodeHandler}>
-                        <label>Enter Email</label>
-                        <input type="text" placeholder="email"
+                        <label for="email">Enter Email</label><br />
+                        <input type="text" id="email" placeholder="email"
                              onChange={(event) => setEmail(event.target.value)} /><br />
                         <button  type="submit">Get Code</button>
                     </form>
                 </div>}
                 {formSubmittion && <div>
                     <form onSubmit={sendCodeHandler}>
-                        <label>Reset Password</label>
+                        <label for="password">Reset Password</label><br />
                         {/* <p>Welcome {retrievedUser.username}</p> */}
-                        <input type="text" placeholder="Enter Code" onChange={(e)=> setCode(e.target.value)}/>
+                        <input id="password" type="text" placeholder="Enter Code" onChange={(e)=> setCode(e.target.value)}/>
                         <button type="submit">Change password</button>
                     </form>
                 </div>}

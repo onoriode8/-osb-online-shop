@@ -1,18 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Card from "../../util/card/card";
 import { Spinner } from "../../util/spinner/spinner";
-import { AuthContext } from "../../hooks/auth-context";
 
 
 const Authentication = (props) => {
-    const context = useContext(AuthContext);
  
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ error, setError ] = useState();
     const [ spinner, setSpinner ] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const loginHandler = async (event) => { 
         event.preventDefault();
@@ -35,21 +34,20 @@ const Authentication = (props) => {
                 throw new Error(responseData);
             };
             setSpinner(false);
-            // alert("Login successful");
-            console.log("responseData from login component", responseData)
-            console.log("context", context)
-            // context.login(responseData.email, responseData.token, responseData.username);
-            // history.replace("/shop"); 
             const dataStored = JSON.stringify(
-                {email: responseData.email, token: responseData.token, username: responseData.username, id: responseData.id})
+                {email: responseData.email, token: responseData.token, 
+                    username: responseData.username, id: responseData.id, image: responseData.image})
             sessionStorage.setItem("auth", dataStored);
-            props.loginFunction(responseData.email, responseData.token, responseData.username, responseData.id);
+            props.loginFunction(responseData.email, responseData.token, responseData.username, responseData.id, responseData.image);
         } catch(err) {
-            // setEmail("");
-            // setPassword("");
             setSpinner(false);
             setError(err.message);
         };
+    };
+
+    const showPasswordHandler = () => {
+        const prevState = showPassword
+        setShowPassword(!prevState); 
     };
 
 
@@ -60,10 +58,14 @@ const Authentication = (props) => {
             <Card displayProps={error ? error : "SignIn"}>
                 <div style={{textAlign: "center"}}>
                     <form onSubmit={loginHandler}>
-                        <input style={{margin: "7px 0px"}} type="text" placeholder="email"
+                        <input style={{margin: "7px 0px"}} type="email" placeholder="email"
                            onChange={(event) => setEmail(event.target.value)} /><br />
-                        <input style={{margin: "7px 0px"}} type="password" placeholder="password" 
+                        <input style={{margin: "7px 0px"}} type={showPassword ? "text" : "password"} placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
+                        <div onClick={showPasswordHandler} style={{display: "flex", justifyContent: "center"}}>
+                            <input type="checkbox"  name="showpsw"/>
+                            <div id="showpsw">show Password</div>
+                        </div><br />
                         <button type="submit">Login</button>
                         <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
                         <div>don't have an account yet! Create one</div>
@@ -81,8 +83,8 @@ const Authentication = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginFunction: (email, token, username, id) => dispatch(
-            {type: "LOGIN", payload: {id: id, email: email, token: token, username: username} })
+        loginFunction: (email, token, username, id, image) => dispatch(
+            {type: "LOGIN", payload: {id: id, email: email, token: token, username: username, image: image} })
     }
 };
 

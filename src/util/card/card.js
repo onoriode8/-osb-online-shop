@@ -4,7 +4,7 @@ function card(props) {
     return (
         <div className={classes.card}>
             <span>
-                <div style={{textAlign: "center"}}>{props.displayProps}</div>
+                <div style={{textAlign: "center", color: "red"}}>{props.displayProps}</div>
             </span>
             <hr />
             <main>

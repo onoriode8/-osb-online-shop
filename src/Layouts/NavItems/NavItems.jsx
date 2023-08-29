@@ -18,6 +18,8 @@ const NavItems = props => {
     const [activeCart, setActiveCart] = useState(false);
     const [activeOrder, setActiveOrder] = useState(false);
     const [activeLogin, setActiveLogin] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
 
     const history = useHistory();
     const activeCartHandler = () => {
@@ -62,6 +64,8 @@ const NavItems = props => {
        activeHomeHandler={activeHomeHandler} activeCartHandler={activeCartHandler}
        activeLoginHandler={activeLoginHandler} activeOrderHandler={activeOrderHandler}
        activeCart={activeCart} activeHome={activeHome} activeLogin={activeLogin} activeOrder={activeOrder}
+       showDropdown={showDropdown} setShowDropdown={() =>setShowDropdown(prevState => !prevState)}
+       showProfile={showProfile} setShowProfile={() => setShowProfile(prevState => !prevState)}
        />
 
     {/* Mobile view size below */}
@@ -75,6 +79,7 @@ const NavItems = props => {
           activeHomeHandler={activeHomeHandler} activeCartHandler={activeCartHandler}
           activeLoginHandler={activeLoginHandler} activeOrderHandler={activeOrderHandler}
           activeCart={activeCart} activeHome={activeHome} activeLogin={activeLogin} activeOrder={activeOrder}
+          showDropdown={showDropdown} setShowDropdown={() =>setShowDropdown(prevState => !prevState)}
         />
     </div>
 )};

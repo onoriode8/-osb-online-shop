@@ -42,7 +42,8 @@ function App(props) {
       console.log("useEffect from App", dataParsed);
       setDataToken(dataParsed.token); setUserId(dataParsed.id);
       //setUsername(dataParsed.username); // setEmail(dataParsed.email); 
-      props.retrievedDataHandler(dataParsed.token, dataParsed.email, dataParsed.userId, dataParsed.username);
+      props.retrievedDataHandler(dataParsed.token, dataParsed.email,
+         dataParsed.userId, dataParsed.username, dataParsed.image);
   }, [props]);
 
   // console.log("from redux authreducer", props);
@@ -82,7 +83,9 @@ function App(props) {
             <Route path={`/${props.username}/checkout/summary/place-order/tshirt`} exact component={TshirtCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/watch`} exact component={WatchCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/shoe`} exact component={ShoeCheckout} />
-            <Route path={`/all/${props.username}/order`} exact component={Order} />
+            {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={Order} />}
+            <Route path={`/${props.username}/account-settings/`} 
+             exact component={() => <h1 style={{margin: "5em 0px"}}>hello settings</h1>} />
             <Redirect to="/shop" />
         </Switch>
         {/* <Bottom /> */}
@@ -109,8 +112,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    retrievedDataHandler: (token, email, id, username) => dispatch(
-       { type: "LOGIN", payload: {id: id, email: email, token: token, username: username} })
+    retrievedDataHandler: (token, email, id, username, image) => dispatch(
+       { type: "LOGIN", payload: {id: id, email: email, token: token, username: username, image: image} })
   }
 }
 

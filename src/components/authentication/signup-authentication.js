@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import { connect } from "react-redux"
 import { NavLink } from "react-router-dom";
 import Card from "../../util/card/card";
-// import { AuthContext } from "../../hooks/auth-context";
 import { Spinner } from "../../util/spinner/spinner";
 
 
 const SignUp = props => {
-
-    // const context = useContext(AuthContext);
-
     const [ username, setUsername ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
@@ -41,22 +37,21 @@ const SignUp = props => {
             };
             setSpinner(false);
             alert("signup successful");
-            console.log("responseData from signup component", responseData)
+            // console.log("responseData from signup component", responseData)
             const dataStored = JSON.stringify(
-                {email: responseData.email, token: responseData.token, username: responseData.username, id: responseData.id})
+                {email: responseData.email, token: responseData.token, 
+                    username: responseData.username, id: responseData.id, image: responseData.image})
             sessionStorage.setItem("auth", dataStored);
             //context.login(responseData.email, responseData.token, responseData.username); //pass the data returned from the backend to context api
-            props.signInFunction(responseData.email, responseData.token, responseData.username, responseData.id);
+            props.signInFunction(responseData.email, responseData.token, responseData.username, responseData.id, responseData.image);
         } catch(err) {
-            // setEmail("") 
-            // setUsername("") 
-            // setPassword("");
             setSpinner(false);
             setError(err.message);
         };
     };
 
-    const showPasswordHandler = (prevState) => {
+    const showPasswordHandler = () => {
+        const prevState = showPassword
         setShowPassword(!prevState); 
     };
 
@@ -70,12 +65,16 @@ const SignUp = props => {
                     <form onSubmit={signupHandler}>
                         <input style={{margin: "7px 0px"}} type="text" placeholder="username"
                            onChange={(event) => setUsername(event.target.value)} /><br />
-                        <input style={{margin: "7px 0px"}} required type="text" placeholder="email"
+                        <input style={{margin: "7px 0px"}} required type="email" placeholder="email"
                            onChange={(event) => setEmail(event.target.value)} /><br />
                         <input style={{margin: "7px 0px"}} type={showPassword ? "text" : "password"} placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
+                        <div onClick={showPasswordHandler} style={{display: "flex", justifyContent: "center"}}>
+                            <input type="checkbox"  name="showpsw"/>
+                            <div id="showpsw">show Password</div>
+                        </div><br />
                         <button type="submit">signup</button>
-                        <p onClick={showPasswordHandler}>show Password</p>
+
                         <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
                         <button><NavLink style={{color: "black", 
                           listStyle: "none", textDecoration: "none"}} 
@@ -91,8 +90,8 @@ const SignUp = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        signInFunction: (email, token, username, id) => dispatch(
-            {type: "SIGNIN", payload: {id: id, email: email, token: token, username: username} })
+        signInFunction: (email, token, username, id, image) => dispatch(
+            {type: "SIGNIN", payload: {id: id, email: email, token: token, username: username, image: image} })
     }
 };
 
