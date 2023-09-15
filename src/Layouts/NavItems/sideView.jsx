@@ -34,8 +34,8 @@ const SideView = props => {
                         {props.shoeCartItems === 0 ? null : <div className={classes.cartItemMobile}>{props.shoeCartItems}</div>}
                     </div>
                 </li> : <li className={classes.li} onClick={props.activeCartHandler}>Cart</li>}
-                {props.activeOrder ? <li className={classes.li}
-                   style={props.activeStyle}>Order</li> : <li className={classes.li} onClick={props.activeOrderHandler}>Order</li>}
+                {props.token && <>{props.activeOrder ? <li className={classes.li}
+                   style={props.activeStyle}>Order</li> : <li className={classes.li} onClick={props.activeOrderHandler}>Order</li>}</> }
                 {props.token ? null : <li className={classes.li} onClick={props.activeLoginHandler}>Login</li>}
                 {/* {props.token ? <li className={classes.li} onClick={logoutHandler}>Logout</li> : null} */}
                 {props.token && 

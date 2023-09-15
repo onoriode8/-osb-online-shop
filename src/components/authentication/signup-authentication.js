@@ -78,7 +78,7 @@ const SignUp = props => {
                         <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
                         <button><NavLink style={{color: "black", 
                           listStyle: "none", textDecoration: "none"}} 
-                          to="/auth">Switch to SigIn</NavLink></button><br />
+                          to="/auth">Switch to SigIn</NavLink></button><br /><br /><hr />
                         <NavLink to="/auth/admin/login">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
                     </form>
                 </div>

@@ -23,12 +23,14 @@ import ShoeCheckout from "./components/allCheckoutComponent/shoeCheckout/shoeChe
 import Order from "./components/Orders/Orders";
 import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
+import Admin from "./admin/admin";
 
 function App(props) {
   const [dataToken, setDataToken] = useState(null);
   const [userId, setUserId] = useState(null);
   // const [email, setEmail] = useState(null);
   // const [username, setUsername] = useState(null);
+  const [admin, setAdmin] = useState(); // pass admin data from backend
 
   const context = useContext(AuthContext);
 
@@ -61,6 +63,7 @@ function App(props) {
             <Route path="/shop/pressingIron/details" exact component={PressingIronDetails} />
             <Route path="/shop/blender/details" exact component={BlenderDetails} />
             <Route path="/cart/all" exact component={Cart} />  
+            <Route path="/admin/adminLogin" exact component={Admin} />
             <Redirect to="/auth" />
           </Switch>
           {/* <Bottom /> */}
@@ -90,7 +93,14 @@ function App(props) {
         </Switch>
         {/* <Bottom /> */}
       </header>
-  }
+  };
+
+  // let adminRoute = <Switch>
+  //           <Route path="/auth" exact component={Authentication} />
+  // </Switch>
+  // if(admin) {
+  //   adminRoute = <Admin />
+  // }
   
   return (
     <React.Fragment>
@@ -98,6 +108,8 @@ function App(props) {
         <AuthContextProvider> 
           {user}
         </AuthContextProvider>
+        {/* {admin === undefined ? <Admin />} */}
+        {/* {adminRoute} */}
     </React.Fragment>
   );
 };

@@ -58,7 +58,7 @@ const Authentication = (props) => {
             <Card displayProps={error ? error : "SignIn"}>
                 <div style={{textAlign: "center"}}>
                     <form onSubmit={loginHandler}>
-                        <input style={{margin: "7px 0px"}} type="email" placeholder="email"
+                        <input style={{margin: "7px 0px"}} type="email" placeholder="email" required
                            onChange={(event) => setEmail(event.target.value)} /><br />
                         <input style={{margin: "7px 0px"}} type={showPassword ? "text" : "password"} placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
@@ -71,8 +71,8 @@ const Authentication = (props) => {
                         <div>don't have an account yet! Create one</div>
                         <button><NavLink style={{color: "black", 
                           listStyle: "none", textDecoration: "none"}} 
-                          to="/auth/signup">Switch to Signup</NavLink></button><br />
-                        <NavLink to="/auth/admin/login">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
+                          to="/auth/signup">Switch to Signup</NavLink></button><br /><br /><hr />
+                        <NavLink to="/admin/adminLogin">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
                     </form>
                 </div>
             </Card>

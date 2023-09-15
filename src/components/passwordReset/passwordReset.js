@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Card from "../../util/card/card";
 import { UpdatePassword } from "./UpdatePassword";
+// import axios from "axios";
 
 
-export const PasswordReset = (props) => {
+export const PasswordReset = () => {
     const [ formSubmittion, setFormSubmittion ] = useState(false);
     const [ email, setEmail ] = useState("");
     const [ code, setCode ] = useState();
@@ -12,11 +13,14 @@ export const PasswordReset = (props) => {
     const [ showUpdatePasswordComponent, setShowUpdatePasswordComponent ] = useState(false);
 
 
+    console.log("EMAIL", email);
+    console.log("CODE", code);
     const getCodeHandler = async (event) => {
         event.preventDefault();
         if(email.length === 0) {
             throw new Error("Email Can't Be Empty!");
         }
+        console.log("email before sending to backend", email);
         try {
             const response = await fetch(`${process.env.REACT_APP_AUTH}/resetPassword/getCode`, {
                 method: "POST",
@@ -25,6 +29,7 @@ export const PasswordReset = (props) => {
                     email
                 })
             });
+            console.log("response from backend", response);
             const responseData = await response.json();
             if(!response.ok) {
                 throw new Error(responseData);
@@ -66,17 +71,19 @@ export const PasswordReset = (props) => {
             <Card displayProps={error !== null ? error : "Reset Password"}>
                 {!formSubmittion && <div>
                     <form onSubmit={getCodeHandler}>
-                        <label for="email">Enter Email</label><br />
+                        <label htmlFor="email">Enter Email</label><br />
                         <input type="text" id="email" placeholder="email"
-                             onChange={(event) => setEmail(event.target.value)} /><br />
+                             onChange={(event) => {console.log(event.target)
+                             setEmail(event.target.value)}} /><br /><br />
                         <button  type="submit">Get Code</button>
                     </form>
                 </div>}
                 {formSubmittion && <div>
                     <form onSubmit={sendCodeHandler}>
-                        <label for="password">Reset Password</label><br />
+                        <label htmlFor="password">Reset Password</label><br />
                         {/* <p>Welcome {retrievedUser.username}</p> */}
-                        <input id="password" type="text" placeholder="Enter Code" onChange={(e)=> setCode(e.target.value)}/>
+                        <input id="password" type="text" placeholder="Enter Code"
+                          onChange={(e)=> setCode(e.target.value)}/><br /><br />
                         <button type="submit">Change password</button>
                     </form>
                 </div>}

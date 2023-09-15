@@ -1,26 +1,27 @@
 .card {
-    border: 1px solid grey;
+    border: 1px solid #fff;
     padding: 20px 1px;
     margin: 15% 8px;
     position: fixed;
     left: 35%;
     right: 35%;
-    background: #dfdfdf;
+    background: #f4f2f2;
+    box-shadow: 1px 0.1px 3px 0.5px;
     text-align: center;
     z-index: 102;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 541px) {
     .card {
-        left: 30%;
-        right: 30%;
+        left: 10%;
+        right: 10%;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 540px) {
     .card {
-        left: 20%;
-        right: 20%;
+        left: 10%;
+        right: 10%;
     }
 }
 

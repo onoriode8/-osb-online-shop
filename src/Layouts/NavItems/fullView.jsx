@@ -54,7 +54,7 @@ const fullView = props => {
                       {props.shoeCartItems === 0 ? null : <div className={classes.cartItem}>{props.shoeCartItems}</div>}
                   </div>
               </li> : <li onClick={props.activeCartHandler}>Cart</li>} 
-              {props.activeOrder ? <li style={props.activeStyle}>Order</li> : <li onClick={props.activeOrderHandler}>Order</li>}
+              {props.token ? <>{props.activeOrder ? <li style={props.activeStyle}>Order</li> : <li onClick={props.activeOrderHandler}>Order</li>}</> : null }
               {props.token && <li onClick={props.setShowDropdown} >Settings
                 {props.showDropdown && <ul style={settingsStyles}>
                     {props.image.length === 0 ? <li title="Add Avatar" onClick={props.setShowProfile} style={{textAlign: "center", fontSize: "3em"}}><RxAvatar /></li>
