@@ -30,7 +30,6 @@ function App(props) {
   const [userId, setUserId] = useState(null);
   // const [email, setEmail] = useState(null);
   // const [username, setUsername] = useState(null);
-  const [admin, setAdmin] = useState(); // pass admin data from backend
 
   const context = useContext(AuthContext);
 
@@ -95,12 +94,6 @@ function App(props) {
       </header>
   };
 
-  // let adminRoute = <Switch>
-  //           <Route path="/auth" exact component={Authentication} />
-  // </Switch>
-  // if(admin) {
-  //   adminRoute = <Admin />
-  // }
   
   return (
     <React.Fragment>
@@ -108,8 +101,6 @@ function App(props) {
         <AuthContextProvider> 
           {user}
         </AuthContextProvider>
-        {/* {admin === undefined ? <Admin />} */}
-        {/* {adminRoute} */}
     </React.Fragment>
   );
 };

@@ -1,0 +1,25 @@
+.header_container {
+    margin: 4em 0em;
+    overflow-y: scroll;
+    margin-right:  60em; 
+    height: 80vh;
+    /* color: blue; */
+}
+
+.ul_container {
+    list-style: none;
+}
+
+.ul_li {
+    text-decoration: none;
+}
+
+.div_container {
+    display: flex;
+    font-size: 1.5em;
+    margin: 10px 0px;
+}
+
+.icons {
+    margin: 0px 8px;
+}

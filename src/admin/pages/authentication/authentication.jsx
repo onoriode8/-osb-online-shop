@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import Card from "../../../util/card/card";
 // import ErrorCard from "../../../util/card/errorCard/errorCard";
 // import { AxiosInstance } from "../../../components/axiosInstance/axiosInstance";
 import classes from "./authentication.module.css";
 import { Spinner } from "../../../util/spinner/spinner";
+import * as actionType from "../../../store/adminStore/adminActions/admin-action";
 
-const Authentication = () => {
+const Authentication = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
@@ -32,6 +34,9 @@ const Authentication = () => {
         setSpinner(false);
         const responseData = await response.json();
         console.log("request", responseData)
+        const adminData = { id: responseData.id, token: responseData.token, email: responseData.email }
+        sessionStorage.setItem("admin", JSON.stringify(adminData))
+        props.adminDataHandler(responseData.id, responseData.token, responseData.email);
         } catch(err) {
             setSpinner(false)
             setError(err.message);
@@ -78,6 +83,14 @@ const Authentication = () => {
             </Card>
         </header>
     );
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        adminDataHandler: (id, token, email) => dispatch({ 
+            type: actionType.ADMIN_LOGIN, payload: { id, token, email } 
+        })
+    }
 }
 
-export default Authentication;
+export default connect(null, mapDispatchToProps)(Authentication);
