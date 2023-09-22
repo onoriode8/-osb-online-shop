@@ -30,7 +30,7 @@ const Authentication = (props) => {
         })
         if(response.ok === false) {
             throw new Error("Failed to login")
-        }
+        };
         setSpinner(false);
         const responseData = await response.json();
         console.log("request", responseData)
@@ -40,16 +40,7 @@ const Authentication = (props) => {
         } catch(err) {
             setSpinner(false)
             setError(err.message);
-        }
-        // .then(res => res.json())
-        //     .then(response => {
-        //         console.log("response from authentication", response)
-        //     })
-        //     .catch(err => {
-        //         setSpinner(false)
-        //         setError(err.message)
-        //     });
-        // console.log("Request from authentication", request)
+        };
     };
 
     const onchangeEmailEvent = (event) => {

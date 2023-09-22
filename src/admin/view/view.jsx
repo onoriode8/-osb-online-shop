@@ -1,13 +1,21 @@
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import classes from "./view.module.css";
 import { BsFillPeopleFill, BsFillKeyFill } from 'react-icons/bs';
 import { VscListUnordered } from "react-icons/vsc";
-import { GiShoppingCart } from "react-icons/gi"
+import { GiShoppingCart } from "react-icons/gi";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
-const view = () => {
+const view = ({email, id, adminLogout}) => {
+
     return (
     <header className={classes.header_container}>
         <h1>Admin Dashboard</h1>
+        <div className={classes.container_div}>
+            <div></div>
+            <li>Email: {email}</li>
+            <li>Id: {id}</li>
+        </div>
         {/* <hr /> */}
         <nav>
             <ul className={classes.ul_container}>
@@ -35,11 +43,25 @@ const view = () => {
                         <li><b>Status</b></li>
                     </div>
                 </NavLink>
-                <li>admin username</li> { /* admin username to be displayed here*/}
+                <a href="/admin/adminLogin" className={classes.ul_li} onClick={adminLogout}>
+                    <div className={classes.div_container}>
+                        <RiLogoutCircleLine className={classes.icons} />
+                        <li><b>Logout</b></li>
+                    </div>
+                {/* </NavLink> */}
+                </a>
             </ul>        
         </nav>
         </header>
     );
 };
 
-export default view;
+const mapStateToProps = state => {
+    return {
+        // id: state.adminReducer.id,
+        // token: state.adminReducer.token,
+        email: state.adminReducer.email
+    }
+}
+
+export default connect(mapStateToProps)(view);

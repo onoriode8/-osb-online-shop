@@ -1,7 +1,7 @@
 .card {
     border: 1px solid #fff;
     padding: 20px 1px;
-    margin: 15% 8px;
+    margin: 9% 8px;
     position: fixed;
     left: 35%;
     right: 35%;
@@ -13,8 +13,8 @@
 
 @media (min-width: 541px) {
     .card {
-        left: 10%;
-        right: 10%;
+        left: 25%;
+        right: 25%;
     }
 }
 

@@ -6,6 +6,13 @@
     /* color: blue; */
 }
 
+.container_div {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
 .ul_container {
     list-style: none;
 }

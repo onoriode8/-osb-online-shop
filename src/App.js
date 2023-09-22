@@ -25,6 +25,8 @@ import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
+import Users from "./admin/pages/users/users";   //remove later
+
 function App(props) {
   const [dataToken, setDataToken] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -63,6 +65,9 @@ function App(props) {
             <Route path="/shop/blender/details" exact component={BlenderDetails} />
             <Route path="/cart/all" exact component={Cart} />  
             <Route path="/admin/adminLogin" exact component={Admin} />
+
+            {/* <Route path="/admin/users" exact component={Users} /> */} {/* remove later */}
+
             <Redirect to="/auth" />
           </Switch>
           {/* <Bottom /> */}
