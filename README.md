@@ -8,7 +8,7 @@ login form and reseting of password with (MERN STACK) | Mongodb | ExpressJs | Re
 
 Host Frontend with Netlify.
 
-website url ==>  https://benevolent-eclair-33dba6.netlify.app
+website url ==>  https://osb-onlineshop.netlify.app
 
 WHAT I LEARNED
 
