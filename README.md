@@ -12,11 +12,11 @@ website url ==>  https://benevolent-eclair-33dba6.netlify.app
 
 WHAT I LEARNED
 
-1) *React & React Hooks such as useState, useEffect, useRef, useCallback
+1) *React & React Hooks such as useState, useEffect, useRef, useCallback, useContext
 2) *Redux for state management
 3) *React icons
 4) *Nodejs and express RESTAPIs 
-5) *MVC pattern for clearner code and learnt middlewares
+5) *MVC pattern for cleaner and easy to maintain code and learnt middlewares
 6) *Connect to Mongodb database using mongoose
 7) *Learned jsonwebtoken (jwt)
 8) *learned the bcryptjs library for hashing password
