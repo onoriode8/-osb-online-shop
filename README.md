@@ -1,14 +1,16 @@
 online-shop and
 LoginForm Coded with MERN stack => MongoDB | Express Js | ReactJs | NodeJs
 
-Hosting Service 💻
+including admin routes for managing users and users products.
+
+Hosting Service for frontend 💻
     Host the Front-End in Netlify
 
 login form and reseting of password with (MERN STACK) | Mongodb | ExpressJs | Reactjs | Nodejs
 
 Host Frontend with Netlify.
 
-website url ==>  https://benevolent-eclair-33dba6.netlify.app
+website url ==>  https://osb-onlineshop.netlify.app
 
 WHAT I LEARNED
 
