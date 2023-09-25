@@ -3,7 +3,8 @@ import * as actionType from "./adminActions/admin-action";
 const initialState = {
     id: null,
     token: null,
-    email: null
+    email: null,
+    mount: false
 };
 
 const adminReducer = (state=initialState, action) => {
@@ -21,6 +22,11 @@ const adminReducer = (state=initialState, action) => {
                 id: state.id = null,
                 token: state.token = null,
                 email: state.email = null
+            }
+        case("ADMIN_PAGE_MOUNT") :
+            return {
+                ...state,
+                mount: !state.mount
             }
         default: 
             return state;

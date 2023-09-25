@@ -6,9 +6,10 @@
     margin-top: 0px;
     padding: 2px 0px;
     top: 0;
-    position: absolute;
+    position: fixed;
     width: 100%;
     left: 0;
+    z-index: 50;
 }
 
 .style {

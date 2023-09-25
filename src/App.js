@@ -98,11 +98,10 @@ function App(props) {
         {/* <Bottom /> */}
       </header>
   };
-
   
   return (
     <React.Fragment>
-        <Navigation />
+        {!props.mount ? <Navigation /> : <h1>ADMIN NAVIGATION HERE</h1>}
         <AuthContextProvider> 
           {user}
         </AuthContextProvider>
@@ -114,7 +113,8 @@ const mapStateToProps = state => {
   return {
     authentication: state.authReducer.authentication,
     token: state.authReducer.token,
-    username: state.authReducer.username
+    username: state.authReducer.username,
+    mount: state.adminReducer.mount
   }
 };
 

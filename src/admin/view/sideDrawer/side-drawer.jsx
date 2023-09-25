@@ -1,19 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import classes from "./view.module.css";
+import classes from "./side-drawer.module.css";
 import { BsFillPeopleFill, BsFillKeyFill } from 'react-icons/bs';
 import { VscListUnordered } from "react-icons/vsc";
 import { GiShoppingCart } from "react-icons/gi";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import SideDrawer from "./sideDrawer/side-drawer";
 
-const view = ({email, id, adminLogout, showSideDrawer, setShowSideDrawer}) => {
+const view = ({email, id, adminLogout}) => {
 
     return (
-    <>
-    <div className={classes.menu} onClick={setShowSideDrawer}>MENU</div>
-    {showSideDrawer ? <SideDrawer id={id} adminLogout={adminLogout} emai={email} /> :
-    <header className={classes.header_container}>
+    <header className={classes.header_containers}>
         <h1>Admin Dashboard</h1><hr/>
         <div className={classes.container_div}>
             <div></div>
@@ -22,40 +18,39 @@ const view = ({email, id, adminLogout, showSideDrawer, setShowSideDrawer}) => {
         </div><hr />
         <nav>
             <ul className={classes.ul_container}>
-                <NavLink to="/admin/users" className={classes.ul_li}>
-                    <div className={classes.div_container}>
-                      <BsFillPeopleFill className={classes.icons} />
+                <NavLink to="/admin/users"  className={classes.ul_li}>
+                    <div className={classes.div_container} >
+                      <BsFillPeopleFill  className={classes.icons} />
                       <li><b>Users</b></li>
                     </div>
                 </NavLink>
                 <NavLink to="/admin/orders" className={classes.ul_li}>
                     <div className={classes.div_container}>
-                      <VscListUnordered className={classes.icons} />
+                      <VscListUnordered  className={classes.icons} />
                        <li><b>Orders</b></li>
                     </div>
                 </NavLink>
                 <NavLink to="" className={classes.ul_li}>
                     <div className={classes.div_container}>
-                        <GiShoppingCart className={classes.icons} />
+                        <GiShoppingCart   className={classes.icons}/>
                         <li><b>Carts</b></li>
                     </div>
                 </NavLink>
                 <NavLink to="" className={classes.ul_li}>
                     <div className={classes.div_container}>
-                        <BsFillKeyFill className={classes.icons} />
+                        <BsFillKeyFill  className={classes.icons} />
                         <li><b>Status</b></li>
                     </div>
                 </NavLink>
                 <NavLink to="/admin/adminLogin" className={classes.ul_li} onClick={adminLogout}>
                     <div className={classes.div_container}>
-                        <RiLogoutCircleLine className={classes.icons} />
+                        <RiLogoutCircleLine  className={classes.icons} />
                         <li><b>Logout</b></li>
                     </div>
                 </NavLink>
             </ul>        
         </nav>
-        </header>}
-        </>
+        </header>
     );
 };
 

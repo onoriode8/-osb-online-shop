@@ -12,6 +12,7 @@ const Admin = (props) => {
    const [adminToken, setAdminToken] = useState(null); // pass admin data from backend
    const [adminId, setAdminId] = useState(null);
    const [adminEmail, setAdminEmail] = useState(null);
+   const [showSideDrawer, setShowSideDrawer] = useState(false)
 
    console.log("admin data from admin reducer", props.token, props.id, props.email)
 
@@ -22,6 +23,10 @@ const Admin = (props) => {
       props.adminDataHandler(null, null, null)
       sessionStorage.removeItem("admin");
    }
+
+   useEffect(() => {
+        props.adminDataMount()
+   }, []);
 
    useEffect(() => {
         const data = sessionStorage.getItem("admin");
@@ -47,7 +52,9 @@ const Admin = (props) => {
     if(props.token || adminToken) { 
         return (
             adminRoutes = <div>
-                <View email={adminEmail} id={adminId} adminLogout={adminLogoutHandler}/>
+                <View email={adminEmail} id={adminId} adminLogout={adminLogoutHandler}
+                  showSideDrawer={showSideDrawer} 
+                  setShowSideDrawer={() => setShowSideDrawer(prevState => !prevState)} />
                 <Switch>
                     <Route path="/admin/users" exact component={Users} />
                     <Route path="/admin/orders" exact component={Orders} />
@@ -77,7 +84,8 @@ const mapDispatchToProps = dispatch => {
     return {
         adminDataHandler: (id, token, email) => dispatch({
             type: actionType.ADMIN_LOGIN, payload: { id, email, token }
-        })
+        }),
+        adminDataMount: () => dispatch({ type: "ADMIN_PAGE_MOUNT" }) 
     }
 }
 
