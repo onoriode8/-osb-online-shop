@@ -1,6 +1,8 @@
 online-shop and
 LoginForm Coded with MERN stack => MongoDB | Express Js | ReactJs | NodeJs
 
+admin routes for managing users and users products.
+
 Hosting Service 💻
     Host the Front-End in Netlify
 
