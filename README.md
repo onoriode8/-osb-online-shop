@@ -1,9 +1,9 @@
 online-shop and
 LoginForm Coded with MERN stack => MongoDB | Express Js | ReactJs | NodeJs
 
-admin routes for managing users and users products.
+including admin routes for managing users and users products.
 
-Hosting Service 💻
+Hosting Service for frontend 💻
     Host the Front-End in Netlify
 
 login form and reseting of password with (MERN STACK) | Mongodb | ExpressJs | Reactjs | Nodejs
