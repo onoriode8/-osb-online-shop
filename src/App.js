@@ -30,8 +30,6 @@ import Users from "./admin/pages/users/users";   //remove later
 function App(props) {
   const [dataToken, setDataToken] = useState(null);
   const [userId, setUserId] = useState(null);
-  // const [email, setEmail] = useState(null);
-  // const [username, setUsername] = useState(null);
 
   const context = useContext(AuthContext);
 
