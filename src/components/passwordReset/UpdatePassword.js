@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "../../util/card/card";
 
-export const UpdatePassword = props => {
+const UpdatePassword = props => {
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ error, setError ] = useState();
@@ -52,3 +52,5 @@ export const UpdatePassword = props => {
         </React.Fragment>
     );
 };
+
+export default UpdatePassword;
