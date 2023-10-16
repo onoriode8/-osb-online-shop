@@ -20,7 +20,6 @@ const Orders = () => {
                 const responseData = await response.json();
                 setSpinner(false)
                 setOrders(responseData);
-                console.log("from admin orders component", responseData)
             } catch(err) {
                 setSpinner(false)
                 setError(err.message);

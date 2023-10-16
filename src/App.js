@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Authentication  from "./components/authentication/authentication";
 import SignUp  from "./components/authentication/signup-authentication"
@@ -22,7 +22,7 @@ import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tsh
 import WatchCheckout from "./components/allCheckoutComponent/watchCheckout/watchCheckout";
 import ShoeCheckout from "./components/allCheckoutComponent/shoeCheckout/shoeCheckout";
 // import Order from "./components/Orders/Orders";
-import { AuthContext } from "./hooks/auth-context";
+// import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
@@ -45,23 +45,19 @@ function App(props) {
   const [dataToken, setDataToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
-  const context = useContext(AuthContext);
+  // const context = useContext(AuthContext);
 
-  console.log("context from App", context);
+  // console.log("context from App", context);
 
   useEffect(() => {
-    // sessionStorage.removeItem("auth")
       const parseData = sessionStorage.getItem("auth");
       const dataParsed = JSON.parse(parseData);
       if(!dataParsed) return;
-      console.log("useEffect from App", dataParsed);
       setDataToken(dataParsed.token); setUserId(dataParsed.id);
-      //setUsername(dataParsed.username); // setEmail(dataParsed.email); 
       props.retrievedDataHandler(dataParsed.token, dataParsed.email,
          dataParsed.userId, dataParsed.username, dataParsed.image);
   }, [props]);
 
-  // console.log("from redux authreducer", props);
   
   let user = <header>
           <Switch>

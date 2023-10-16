@@ -20,7 +20,6 @@ const Users = () => {
                 const responseData = await response.json();
                 setSpinner(false)
                 setUsers(responseData);
-                console.log("from admin users component", responseData)
             } catch(err) {
                 setSpinner(false)
                 setError(err.message);

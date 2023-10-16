@@ -21,7 +21,6 @@ const Authentication = (props) => {
             email: email,
             password: password
         }
-        console.log(email, password)
         try {
         const response = await fetch(process.env.REACT_APP_AUTH + "/admin/adminLogin", {
             method: "POST",
@@ -33,7 +32,6 @@ const Authentication = (props) => {
         };
         setSpinner(false);
         const responseData = await response.json();
-        console.log("request", responseData)
         const adminData = { id: responseData.id, token: responseData.token, email: responseData.email }
         sessionStorage.setItem("admin", JSON.stringify(adminData))
         props.adminDataHandler(responseData.id, responseData.token, responseData.email);

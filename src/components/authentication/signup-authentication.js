@@ -30,19 +30,16 @@ const SignUp = props => {
                     email, password, username
                 })
             })
-            console.log("direct response from server", response);
             const responseData = await response.json();
             if(!response.ok) {
                 throw new Error(responseData);
             };
             setSpinner(false);
             alert("signup successful");
-            // console.log("responseData from signup component", responseData)
             const dataStored = JSON.stringify(
                 {email: responseData.email, token: responseData.token, 
                     username: responseData.username, id: responseData.id, image: responseData.image})
             sessionStorage.setItem("auth", dataStored);
-            //context.login(responseData.email, responseData.token, responseData.username); //pass the data returned from the backend to context api
             props.signInFunction(responseData.email, responseData.token, responseData.username, responseData.id, responseData.image);
         } catch(err) {
             setSpinner(false);
