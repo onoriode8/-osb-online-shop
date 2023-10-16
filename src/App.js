@@ -26,6 +26,8 @@ import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
+import IndexHtml from "../public/index.html";
+
 import Users from "./admin/pages/users/users";   //remove later
 
 const asyncHome = asyncComponent(() => import("./container/Home/Home"))
@@ -76,10 +78,11 @@ function App(props) {
             <Route path="/shop/blender/details" exact component={asyncBlenderDetails} />
             <Route path="/cart/all" exact component={asyncCart} />  
             <Route path="/admin/adminLogin" exact component={Admin} />
+            <Route component={IndexHtml} />
 
             {/* <Route path="/admin/users" exact component={Users} /> */} {/* remove later */}
 
-            <Redirect to="/auth" />
+            {/* <Redirect to="/auth" /> */}
           </Switch>
           {/* <Bottom /> */}
         </header>
@@ -104,7 +107,10 @@ function App(props) {
             {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={asyncOrder} />}
             <Route path={`/${props.username}/account-settings/`} 
              exact component={() => <h1 style={{margin: "5em 0px"}}>hello settings</h1>} />
-            <Redirect to="/shop" />
+             
+            <Route component={IndexHtml} />
+
+            {/* <Redirect to="/shop" /> */}
         </Switch>
         {/* <Bottom /> */}
       </header>
