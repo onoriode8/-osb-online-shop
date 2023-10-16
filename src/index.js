@@ -22,7 +22,7 @@ const store = createStore(rootReducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/auth">
       <Provider store={store}>
          <App />
       </Provider>
