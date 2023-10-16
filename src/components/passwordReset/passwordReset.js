@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Card from "../../util/card/card";
-import { UpdatePassword } from "./UpdatePassword";
+import UpdatePassword  from "./UpdatePassword";
 // import axios from "axios";
 
 
-export const PasswordReset = () => {
+const PasswordReset = () => {
     const [ formSubmittion, setFormSubmittion ] = useState(false);
     const [ email, setEmail ] = useState("");
     const [ code, setCode ] = useState();
@@ -92,3 +92,5 @@ export const PasswordReset = () => {
         </React.Fragment>
     );
 };
+
+export default PasswordReset;

@@ -2,30 +2,43 @@ import React, { useState, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import Authentication  from "./components/authentication/authentication";
 import SignUp  from "./components/authentication/signup-authentication"
-import { PasswordReset } from "./components/passwordReset/passwordReset";
+// import { PasswordReset } from "./components/passwordReset/passwordReset";
+import asyncComponent from "./hoc/asyncComponent";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Home } from "./container/Home/Home";
-import BagDetails from "./shopDetails/bagDetails/bag-details";
-import PressingIronDetails from "./shopDetails/pressingIronDetails/pressingIron-details";
-import BlenderDetails from "./shopDetails/blenderDetails/blender-details";
-import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
-import WatchDetails from "./shopDetails/WatchDetails/watch-details";
-import ShoeDetails from "./shopDetails/shoeDetails/shoe-details";
+// import { Home } from "./container/Home/Home";
+// import BagDetails from "./shopDetails/bagDetails/bag-details";
+// import PressingIronDetails from "./shopDetails/pressingIronDetails/pressingIron-details";
+// import BlenderDetails from "./shopDetails/blenderDetails/blender-details";
+// import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
+// import WatchDetails from "./shopDetails/WatchDetails/watch-details";
+// import ShoeDetails from "./shopDetails/shoeDetails/shoe-details";
 import Navigation from "./Layouts/Navigation/Navigation";
 // import Bottom from "./Layouts/Bottom/Bottom";
-import Cart from "./container/dashboard/cart/cart";
+// import Cart from "./container/dashboard/cart/cart";
 import PressingIronCheckout from "./components/allCheckoutComponent/pressingIronCheckout/pressingIronCheckout"
 import BlenderCheckout from "./components/allCheckoutComponent/blenderCheckout/blenderCheckout"
 import BagCheckout from "./components/allCheckoutComponent/bagCheckout/bagCheckout";
 import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tshirtCheckout";
 import WatchCheckout from "./components/allCheckoutComponent/watchCheckout/watchCheckout";
 import ShoeCheckout from "./components/allCheckoutComponent/shoeCheckout/shoeCheckout";
-import Order from "./components/Orders/Orders";
+// import Order from "./components/Orders/Orders";
 import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
 import Users from "./admin/pages/users/users";   //remove later
+
+const asyncHome = asyncComponent(() => import("./container/Home/Home"))
+const asyncPasswordReset = asyncComponent(() => import("./components/passwordReset/passwordReset"))
+const asyncTshirtDetails = asyncComponent(() => import("./shopDetails/TshirtDetails/tshirt-details"))
+const asyncWatchDetails = asyncComponent(() => import("./shopDetails/WatchDetails/watch-details"))
+const asyncShoeDetails = asyncComponent(() => import("./shopDetails/shoeDetails/shoe-details"))
+const asyncBagDetails = asyncComponent(() => import("./shopDetails/bagDetails/bag-details"))
+const asyncPressingIronDetails = asyncComponent(() => import("./shopDetails/pressingIronDetails/pressingIron-details"))
+const asyncBlenderDetails = asyncComponent(() => import("./shopDetails/blenderDetails/blender-details"))
+const asyncOrder = asyncComponent(() => import("./components/Orders/Orders"))
+const asyncCart = asyncComponent(() => import("./container/dashboard/cart/cart"))
+
 
 function App(props) {
   const [dataToken, setDataToken] = useState(null);
@@ -53,15 +66,15 @@ function App(props) {
           <Switch>
             <Route path="/auth" exact component={Authentication} />
             <Route path="/auth/signup" exact component={SignUp} />
-            <Route path="/auth/forgot_password" exact component={PasswordReset} /> 
-            <Route path="/shop" exact component={Home} /> 
-            <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
-            <Route path="/shop/watch/details" exact component={WatchDetails} />
-            <Route path="/shop/shoe/details" exact component={ShoeDetails} />
-            <Route path="/shop/bag/details" exact component={BagDetails} />
-            <Route path="/shop/pressingIron/details" exact component={PressingIronDetails} />
-            <Route path="/shop/blender/details" exact component={BlenderDetails} />
-            <Route path="/cart/all" exact component={Cart} />  
+            <Route path="/auth/forgot_password" exact component={asyncPasswordReset} /> 
+            <Route path="/shop" exact component={asyncHome} /> 
+            <Route path="/shop/t-shirt/details" exact component={asyncTshirtDetails} />
+            <Route path="/shop/watch/details" exact component={asyncWatchDetails} />
+            <Route path="/shop/shoe/details" exact component={asyncShoeDetails} />
+            <Route path="/shop/bag/details" exact component={asyncBagDetails} />
+            <Route path="/shop/pressingIron/details" exact component={asyncPressingIronDetails} />
+            <Route path="/shop/blender/details" exact component={asyncBlenderDetails} />
+            <Route path="/cart/all" exact component={asyncCart} />  
             <Route path="/admin/adminLogin" exact component={Admin} />
 
             {/* <Route path="/admin/users" exact component={Users} /> */} {/* remove later */}
@@ -74,21 +87,21 @@ function App(props) {
   if(props.authentication || props.token || dataToken || userId) {
       user = <header>
         <Switch>
-            <Route path="/shop" exact component={Home} /> 
-            <Route path="/shop/bag/details" exact component={BagDetails} />
-            <Route path="/shop/pressingIron/details" exact component={PressingIronDetails} />
-            <Route path="/shop/blender/details" exact component={BlenderDetails} />
-            <Route path="/shop/t-shirt/details" exact component={TshirtDetails} />
-            <Route path="/shop/watch/details" exact component={WatchDetails} />
-            <Route path="/shop/shoe/details" exact component={ShoeDetails} />
-            <Route path="/cart/all" exact component={Cart} />
+            <Route path="/shop" exact component={asyncHome} /> 
+            <Route path="/shop/bag/details" exact component={asyncBagDetails} />
+            <Route path="/shop/pressingIron/details" exact component={asyncPressingIronDetails} />
+            <Route path="/shop/blender/details" exact component={asyncBlenderDetails} />
+            <Route path="/shop/t-shirt/details" exact component={asyncTshirtDetails} />
+            <Route path="/shop/watch/details" exact component={asyncWatchDetails} />
+            <Route path="/shop/shoe/details" exact component={asyncShoeDetails} />
+            <Route path="/cart/all" exact component={asyncCart} />
             <Route path={`/${props.username}/checkout/summary/place-order/bag`} exact component={BagCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/pressingIron`} exact component={PressingIronCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/blender`} exact component={BlenderCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/tshirt`} exact component={TshirtCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/watch`} exact component={WatchCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/shoe`} exact component={ShoeCheckout} />
-            {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={Order} />}
+            {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={asyncOrder} />}
             <Route path={`/${props.username}/account-settings/`} 
              exact component={() => <h1 style={{margin: "5em 0px"}}>hello settings</h1>} />
             <Redirect to="/shop" />
