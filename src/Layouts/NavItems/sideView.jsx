@@ -13,14 +13,9 @@ const SideView = props => {
         props.logoutUserHandler();
         history.push("/auth");
     };
-
-    let assignClass = [classes.navMobile, classes.navMobile_close];
-    if(props.showMenu) {
-        return assignClass = [classes.navMobile, classes.navMobile_open];
-    }
     return (
         <div>
-        {props.showMenu && <nav className={classes.assignClass.join(" ")}> 
+        {props.showMenu && <nav className={classes.navMobile}> 
         <div><img src={mylogo} alt="" style={{width: "3em", margin: "2em 10px"}}/></div>
 
             <ul className={classes.styleMobile} onClick={props.setShowMenu}>
