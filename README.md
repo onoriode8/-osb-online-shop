@@ -12,7 +12,7 @@ Host Frontend with Netlify.
 
 website url ==>  https://osb-onlineshop.netlify.app
 
-WHAT I LEARNED
+TECH STACK USE
 
 1) *React & React Hooks such as useState, useEffect, useRef, useCallback, useContext
 2) *Redux for state management
