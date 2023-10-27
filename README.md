@@ -11,6 +11,7 @@ login form and reseting of password with (MERN STACK) | Mongodb | ExpressJs | Re
 Host Frontend with Netlify.
 
 website url ==>  https://osb-onlineshop.netlify.app
+user credential to login => email: test@gmail.com and password: typescript
 
 TECH STACK USE
 
