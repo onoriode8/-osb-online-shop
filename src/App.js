@@ -27,7 +27,8 @@ import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
 
-import Users from "./admin/pages/users/users";   //remove later
+//import Users from "./admin/pages/users/users";   //remove later
+// import Settings from "./container/settings/settings";
 
 const asyncHome = asyncComponent(() => import("./container/Home/Home"))
 const asyncPasswordReset = asyncComponent(() => import("./components/passwordReset/passwordReset"))
@@ -39,6 +40,7 @@ const asyncPressingIronDetails = asyncComponent(() => import("./shopDetails/pres
 const asyncBlenderDetails = asyncComponent(() => import("./shopDetails/blenderDetails/blender-details"))
 const asyncOrder = asyncComponent(() => import("./components/Orders/Orders"))
 const asyncCart = asyncComponent(() => import("./container/dashboard/cart/cart"))
+const asyncSettings = asyncComponent(() => import("./container/settings/settings"))
 
 
 function App(props) {
@@ -99,8 +101,7 @@ function App(props) {
             <Route path={`/${props.username}/checkout/summary/place-order/watch`} exact component={WatchCheckout} />
             <Route path={`/${props.username}/checkout/summary/place-order/shoe`} exact component={ShoeCheckout} />
             {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={asyncOrder} />}
-            <Route path={`/${props.username}/account-settings/`} 
-             exact component={() => <h1 style={{margin: "5em 0px"}}>hello settings</h1>} />
+            <Route path={`/${props.username}/account-settings/`} exact component={asyncSettings} />
 
             <Redirect to="/shop" />
         </Switch>

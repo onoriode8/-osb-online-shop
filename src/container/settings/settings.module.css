@@ -1,0 +1,57 @@
+.cont {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5%;
+    box-shadow: 1px 2px 9px 0px #ccc;
+    padding: 10px 0px;
+}
+
+@media(max-width: 600px) {
+    .cont {
+        text-align: center;
+        margin-top: 20%;
+    }
+}
+
+@media(max-width: 400px) {
+    .cont {
+        text-align: center;
+        margin-top: 40%;
+    }
+}
+
+@media(max-width: 200px) {
+    .cont {
+        text-align: center;
+        margin-top: 60%;
+    }
+}
+
+
+.Container {
+    box-shadow: 1px 2px 9px 0px #ccc;
+}
+
+.login_settings_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text_icon_cont {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    margin: 5px 10px;
+    padding: 6px;
+}
+
+.text_icon_cont p {
+    margin: 5px 16px;
+}
