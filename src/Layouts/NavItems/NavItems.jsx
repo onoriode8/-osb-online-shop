@@ -48,7 +48,7 @@ const NavItems = props => {
         setActiveOrder(false);
         setActiveCart(false);
         setActiveHome(true) 
-        history.push("/shop")
+        history.push("/")
     };
     return (
     <div>

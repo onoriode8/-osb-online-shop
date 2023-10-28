@@ -25,8 +25,8 @@ const fullView = props => {
         props.logoutUserHandler();
     };
 
-    console.log(props.showProfile); // work on here in getting the showprofile passed as props and add a submit handler
-    console.log(props.setShowProfile)
+    //console.log(props.showProfile); // work on here in getting the showprofile passed as props and add a submit handler
+    // console.log(props.setShowProfile)
 
     return (
         <>

@@ -63,10 +63,10 @@ function App(props) {
   
   let user = <header>
           <Switch>
+            <Route path="/" exact component={asyncHome} /> 
             <Route path="/auth" exact component={Authentication} />
             <Route path="/auth/signup" exact component={SignUp} />
             <Route path="/auth/forgot_password" exact component={asyncPasswordReset} /> 
-            <Route path="/shop" exact component={asyncHome} /> 
             <Route path="/shop/t-shirt/details" exact component={asyncTshirtDetails} />
             <Route path="/shop/watch/details" exact component={asyncWatchDetails} />
             <Route path="/shop/shoe/details" exact component={asyncShoeDetails} />
@@ -86,7 +86,7 @@ function App(props) {
   if(props.authentication || props.token || dataToken || userId) {
       user = <header>
         <Switch>
-            <Route path="/shop" exact component={asyncHome} /> 
+            <Route path="/" exact component={asyncHome} /> 
             <Route path="/shop/bag/details" exact component={asyncBagDetails} />
             <Route path="/shop/pressingIron/details" exact component={asyncPressingIronDetails} />
             <Route path="/shop/blender/details" exact component={asyncBlenderDetails} />
@@ -103,7 +103,7 @@ function App(props) {
             {props.username === null ? null : <Route path={`/all/${props.username}/order`} exact component={asyncOrder} />}
             <Route path={`/${props.username}/account-settings/`} exact component={asyncSettings} />
 
-            <Redirect to="/shop" />
+            <Redirect to="/" />
         </Switch>
         {/* <Bottom /> */}
       </header>
