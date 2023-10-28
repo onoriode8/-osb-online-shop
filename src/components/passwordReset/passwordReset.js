@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Card from "../../util/card/card";
+// import Card from "../../util/card/card";
+import UIPassword from "./ui_password";
 import UpdatePassword  from "./UpdatePassword";
 // import axios from "axios";
 
@@ -9,6 +10,7 @@ const PasswordReset = () => {
     const [ email, setEmail ] = useState("");
     const [ code, setCode ] = useState();
     const [ error, setError ] = useState(null);
+    const [ spinner, setSpinner ] = useState(false);
     const [ retrievedUser, setRetrievedUser ] = useState();
     const [ showUpdatePasswordComponent, setShowUpdatePasswordComponent ] = useState(false);
 
@@ -18,8 +20,11 @@ const PasswordReset = () => {
     const getCodeHandler = async (event) => {
         event.preventDefault();
         if(email.length === 0) {
-            throw new Error("Email Can't Be Empty!");
+            // throw new Error("Email Can't Be Empty!");
+            alert("Email Can't Be Empty!")
+            return 
         }
+        setSpinner(true)
         console.log("email before sending to backend", email);
         try {
             const response = await fetch(`${process.env.REACT_APP_AUTH}/resetPassword/getCode`, {
@@ -34,9 +39,10 @@ const PasswordReset = () => {
             if(!response.ok) {
                 throw new Error(responseData);
             };
+             setSpinner(false)
             setFormSubmittion(true);
-            alert(responseData);
             setRetrievedUser(responseData);
+            alert('Enter the 6 digits pin sent to your email');
         } catch(err) {
             setError(err.message); 
         }
@@ -48,6 +54,7 @@ const PasswordReset = () => {
             const error = code.length < 6 ? "Code must be 6 digits" : "Code must not be more than 6 digits";
             throw new Error(error);
         };
+        setSpinner(true)
         try {
             const response = await fetch(`${process.env.REACT_APP_AUTH}/${retrievedUser.username}/password_reset`, {
                 method: "POST",
@@ -60,6 +67,7 @@ const PasswordReset = () => {
             if(!response.ok) {
                 throw new Error(responseData);
             };
+            setSpinner(false);
             setShowUpdatePasswordComponent(true);
         } catch(err) {
             setError(err.message); 
@@ -68,27 +76,34 @@ const PasswordReset = () => {
 
     return (
         <React.Fragment>
-            <Card displayProps={error !== null ? error : "Reset Password"}>
+            <UIPassword passwordResetComponent={true} spinner={spinner} 
+                error={error} setEmail={setEmail} 
+                sendCodeHandler={sendCodeHandler} retrievedUser={retrievedUser}
+                formSubmittion={formSubmittion} setCode={setCode}
+                getCodeHandler={getCodeHandler}/>
+            {/* <Card displayProps={error !== null ? error : "Reset Password"}>
                 {!formSubmittion && <div>
                     <form onSubmit={getCodeHandler}>
                         <label htmlFor="email">Enter Email</label><br />
                         <input type="text" id="email" placeholder="email"
-                             onChange={(event) => {console.log(event.target)
-                             setEmail(event.target.value)}} /><br /><br />
-                        <button  type="submit">Get Code</button>
+                             onChange={(event) => setEmail(event.target.value)} /><br /><br />
+                        <button type="submit">Get Code</button>
                     </form>
                 </div>}
                 {formSubmittion && <div>
                     <form onSubmit={sendCodeHandler}>
                         <label htmlFor="password">Reset Password</label><br />
-                        {/* <p>Welcome {retrievedUser.username}</p> */}
+                        <p>Welcome {retrievedUser.username}</p>
                         <input id="password" type="text" placeholder="Enter Code"
                           onChange={(e)=> setCode(e.target.value)}/><br /><br />
                         <button type="submit">Change password</button>
                     </form>
                 </div>}
-            </Card>
-            {showUpdatePasswordComponent && <UpdatePassword user={retrievedUser}/>}
+            </Card> */}
+            {/* {showUpdatePasswordComponent &&  */}
+            <UpdatePassword
+            showUpdatePasswordComponent={showUpdatePasswordComponent} user={retrievedUser}/>
+            {/* } */}
         </React.Fragment>
     );
 };

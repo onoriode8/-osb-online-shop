@@ -25,8 +25,8 @@
 }
 .loader {
   color: orange;
-  font-size: 10px;
-  margin: 80px auto;
+  font-size: 5px;
+  margin: 50px auto;
   position: relative;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);

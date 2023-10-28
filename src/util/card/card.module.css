@@ -1,7 +1,7 @@
 .card {
     border: 1px solid #ccc;
     padding: 20px 1px;
-    margin: 9% 8px;
+    margin: 20% 8px;
     position: fixed;
     left: 35%;
     right: 35%;
@@ -23,6 +23,7 @@
     .card {
         left: 10%;
         right: 10%;
+        margin: 35% 0%;
     }
 }
 
@@ -30,5 +31,7 @@
     .card {
         left: 11%;
         right: 11%;
+        margin: 50% 0%;
+
     }
 }

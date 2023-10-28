@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Card from "../../util/card/card";
+import UIPassword from "./ui_password";
+
 
 const UpdatePassword = props => {
     const [ password, setPassword ] = useState("");
@@ -29,12 +31,14 @@ const UpdatePassword = props => {
         }
     };
 
-    const filteredPassword = password.filter(item => item === confirmPassword);
-    console.log("filteredPassword in updatePassword component", filteredPassword);
+    //const filteredPassword = password.filter(item => item === confirmPassword);
+    //console.log("filteredPassword in updatePassword component", filteredPassword);
 
     return (
         <React.Fragment>
-            <Card displayProps={error}>
+            <UIPassword setPassword={setPassword} setConfirmPassword={setConfirmPassword} 
+            changePasswordHandler={changePasswordHandler} error={error} />
+            {/* <Card displayProps={error}>
                 <div>
                     <label>Re-enter Password</label>
                     <input type="text" placeholder="password" 
@@ -48,7 +52,7 @@ const UpdatePassword = props => {
                         <button type="submit">Change Password</button>
                     </form>
                 </div>
-            </Card>
+            </Card> */}
         </React.Fragment>
     );
 };

@@ -7,7 +7,6 @@ import classes from "./settings.module.css"
 
 const settings = (props) => {
 
-    console.log(props)
     return (
         <div className={classes.cont}>
             <div className={classes.header}>
