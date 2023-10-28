@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Card from "../../util/card/card";
 import { Spinner } from "../../util/spinner/spinner";
+import Button from "../../util/loginBtn/loginBtn";
+
 
 
 const Authentication = (props) => {
@@ -50,6 +52,27 @@ const Authentication = (props) => {
         setShowPassword(!prevState); 
     };
 
+    const styles = {
+        margin: "7px 0px", 
+        boxSizing: "border-box", padding: '8px',
+        borderTop: 'none', borderLeft: 'none',borderRight: 'none',
+        background: 'none', borderBottom: '2px solid #ccc', outline: 'none',
+        width: "80%"
+    };
+
+    const navStyles= {
+        textDecoration: 'none',
+        color: 'black'
+    };
+
+    const btnStyle = {
+        background: "rgba(55, 55, 232, 0.5)", 
+        color: "#fff",
+        borderRadius: "2em",
+        border: "1px solid #fff",
+        width: "10em",
+        height: "5vh"
+    }
 
     return (
         <React.Fragment>
@@ -58,21 +81,19 @@ const Authentication = (props) => {
             <Card displayProps={error ? error : "SignIn"}>
                 <div style={{textAlign: "center"}}>
                     <form onSubmit={loginHandler}>
-                        <input style={{margin: "7px 0px"}} type="email" placeholder="email" required
+                        <input style={styles} placeholder="email" required
                            onChange={(event) => setEmail(event.target.value)} /><br />
-                        <input style={{margin: "7px 0px"}} type={showPassword ? "text" : "password"} placeholder="password" 
+                        <input style={styles} type={showPassword ? "text" : "password"} placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
                         <div onClick={showPasswordHandler} style={{display: "flex", justifyContent: "center"}}>
                             <input type="checkbox"  name="showpsw"/>
                             <div id="showpsw">show Password</div>
                         </div><br />
-                        <button type="submit">Login</button>
-                        <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
-                        <div>don't have an account yet! Create one</div>
-                        <button><NavLink style={{color: "black", 
-                          listStyle: "none", textDecoration: "none"}} 
-                          to="/auth/signup">Switch to Signup</NavLink></button><br /><br /><hr />
-                        <NavLink to="/admin/adminLogin">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
+                        <Button name='Login' title='Login'/>
+                        <NavLink style={navStyles} to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
+                        <div>don't have an account yet! Create one</div><br />
+                        <button style={btnStyle}><NavLink style={navStyles} to="/auth/signup">Switch to Signup</NavLink></button><br /><br /><hr />
+                        <NavLink style={navStyles} to="/admin/adminLogin">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
                     </form>
                 </div>
             </Card>

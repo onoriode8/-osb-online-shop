@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 import { NavLink } from "react-router-dom";
 import Card from "../../util/card/card";
 import { Spinner } from "../../util/spinner/spinner";
+import Button from "../../util/loginBtn/loginBtn";
+
 
 
 const SignUp = props => {
@@ -52,6 +54,28 @@ const SignUp = props => {
         setShowPassword(!prevState); 
     };
 
+    const styles = {
+        margin: "7px 0px", 
+        boxSizing: "border-box", padding: '8px',
+        borderTop: 'none', borderLeft: 'none',borderRight: 'none',
+        background: 'none', borderBottom: '2px solid #ccc', outline: 'none',
+        width: "80%"
+    }
+
+    const navStyles= {
+        textDecoration: 'none',
+        color: 'black'
+    }
+
+    const btnStyle = {
+        background: "rgba(55, 55, 232, 0.5)", 
+        color: "#fff",
+        borderRadius: "2em",
+        border: "1px solid #fff",
+        width: "10em",
+        height: "5vh"
+    }
+
     return (
         <React.Fragment>
             <div style={{margin: "4em 0em"}}>
@@ -60,23 +84,22 @@ const SignUp = props => {
             <Card displayProps={error ? error : "SignUp"}>
                 <div style={{textAlign: "center"}}>
                     <form onSubmit={signupHandler}>
-                        <input style={{margin: "7px 0px"}} type="text" placeholder="username"
+                        <input style={styles} type="text" placeholder="username"
                            onChange={(event) => setUsername(event.target.value)} /><br />
-                        <input style={{margin: "7px 0px"}} required type="email" placeholder="email"
+                        <input style={styles} required type="email" placeholder="email"
                            onChange={(event) => setEmail(event.target.value)} /><br />
-                        <input style={{margin: "7px 0px"}} type={showPassword ? "text" : "password"} placeholder="password" 
+                        <input style={styles} type={showPassword ? "text" : "password"} placeholder="password" 
                            onChange={(event) => setPassword(event.target.value)} /><br />
                         <div onClick={showPasswordHandler} style={{display: "flex", justifyContent: "center"}}>
                             <input type="checkbox"  name="showpsw"/>
                             <div id="showpsw">show Password</div>
                         </div><br />
-                        <button type="submit">signup</button>
+                        {/* <button style={btnStyle} type="submit">signup</button> */}
+                        <Button name='Signup' title='Signup'/>
 
-                        <NavLink to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
-                        <button><NavLink style={{color: "black", 
-                          listStyle: "none", textDecoration: "none"}} 
-                          to="/auth">Switch to SigIn</NavLink></button><br /><br /><hr />
-                        <NavLink to="/auth/admin/login">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
+                        <NavLink style={navStyles} to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
+                        <button style={btnStyle}><NavLink style={navStyles} to="/auth">Switch to SigIn</NavLink></button><br /><br /><hr />
+                        <NavLink style={navStyles} to="/auth/admin/login">Admin</NavLink> {/* // click to login for admin. work on the login form of admin later.*/}
                     </form>
                 </div>
             </Card>

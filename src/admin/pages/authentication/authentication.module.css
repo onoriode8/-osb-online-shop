@@ -1,9 +1,25 @@
 
 .input {
-    width: 250px;
+    /* width: 250px;
     height: 12px;
-    padding: 8px 5px;
+    padding: 8px 5px; */
+
+    margin: 7px 0px; 
+    box-sizing: border-box;
+    padding: 8px;
+    border-top: none; 
+    border-left: none;
+    border-right: none;
+    background: none; 
+    border-bottom: 2px solid #ccc; 
+    outline: none;
+    width: 80%
 }
+
+.input:focus {
+    background-color: #ccc;
+}
+
 
 @media (max-width: 540px) {
     .input {

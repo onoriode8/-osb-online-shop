@@ -6,6 +6,8 @@ import Card from "../../../util/card/card";
 import classes from "./authentication.module.css";
 import { Spinner } from "../../../util/spinner/spinner";
 import * as actionType from "../../../store/adminStore/adminActions/admin-action";
+import Button from '../../../util/loginBtn/loginBtn'
+
 
 const Authentication = (props) => {
     const [email, setEmail] = useState("");
@@ -67,7 +69,8 @@ const Authentication = (props) => {
                        <input type='checkBox' />
                        <div>show password</div>
                     </div><br /><br />
-                    <button type="submit" title="Login">Login</button>
+                    {/* <button className={classes.btn} type="submit" title="Login">Login</button> */}
+                    <Button name='Login' title='Login'/>
                 </form>
             </Card>
         </header>
