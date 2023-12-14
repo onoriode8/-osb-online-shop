@@ -89,6 +89,11 @@ const Authentication = (props) => {
                             <input type="checkbox"  name="showpsw"/>
                             <div id="showpsw">show Password</div>
                         </div><br />
+                        <div>
+                            <p>Login Details:</p>
+                            <p>Email: test@gmail.com</p>
+                            <p>password: typescript</p>
+                        </div>
                         <Button name='Login' title='Login'/>
                         <NavLink style={navStyles} to="/auth/forgot_password"><p>Forgot Password!</p></NavLink>
                         <div>don't have an account yet! Create one</div><br />

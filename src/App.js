@@ -2,33 +2,19 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Authentication  from "./components/authentication/authentication";
 import SignUp  from "./components/authentication/signup-authentication"
-// import { PasswordReset } from "./components/passwordReset/passwordReset";
 import asyncComponent from "./hoc/asyncComponent";
 import { Route, Switch, Redirect } from "react-router-dom";
-// import { Home } from "./container/Home/Home";
-// import BagDetails from "./shopDetails/bagDetails/bag-details";
-// import PressingIronDetails from "./shopDetails/pressingIronDetails/pressingIron-details";
-// import BlenderDetails from "./shopDetails/blenderDetails/blender-details";
-// import TshirtDetails from "./shopDetails/TshirtDetails/tshirt-details";
-// import WatchDetails from "./shopDetails/WatchDetails/watch-details";
-// import ShoeDetails from "./shopDetails/shoeDetails/shoe-details";
 import Navigation from "./Layouts/Navigation/Navigation";
-// import Bottom from "./Layouts/Bottom/Bottom";
-// import Cart from "./container/dashboard/cart/cart";
 import PressingIronCheckout from "./components/allCheckoutComponent/pressingIronCheckout/pressingIronCheckout"
 import BlenderCheckout from "./components/allCheckoutComponent/blenderCheckout/blenderCheckout"
 import BagCheckout from "./components/allCheckoutComponent/bagCheckout/bagCheckout";
 import TshirtCheckout from "./components/allCheckoutComponent/TshirtCheckout/tshirtCheckout";
 import WatchCheckout from "./components/allCheckoutComponent/watchCheckout/watchCheckout";
 import ShoeCheckout from "./components/allCheckoutComponent/shoeCheckout/shoeCheckout";
-// import Order from "./components/Orders/Orders";
-// import { AuthContext } from "./hooks/auth-context";
 import AuthContextProvider from "./hooks/auth-context";
 import Admin from "./admin/admin";
 
 
-//import Users from "./admin/pages/users/users";   //remove later
-// import Settings from "./container/settings/settings";
 
 const asyncHome = asyncComponent(() => import("./container/Home/Home"))
 const asyncPasswordReset = asyncComponent(() => import("./components/passwordReset/passwordReset"))
@@ -47,9 +33,6 @@ function App(props) {
   const [dataToken, setDataToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
-  // const context = useContext(AuthContext);
-
-  // console.log("context from App", context);
 
   useEffect(() => {
       const parseData = sessionStorage.getItem("auth");
@@ -75,12 +58,8 @@ function App(props) {
             <Route path="/shop/blender/details" exact component={asyncBlenderDetails} />
             <Route path="/cart/all" exact component={asyncCart} />  
             <Route path="/admin/adminLogin" exact component={Admin} />
-
-            {/* <Route path="/admin/users" exact component={Users} /> */} {/* remove later */}
-
             <Redirect to="/auth" />
           </Switch>
-          {/* <Bottom /> */}
         </header>
 
   if(props.authentication || props.token || dataToken || userId) {

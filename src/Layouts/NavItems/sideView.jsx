@@ -1,7 +1,5 @@
-// import { NavLink, useHistory } from "react-router-dom";
 import { connect } from "react-redux"
 import { AiOutlinePoweroff } from "react-icons/ai";
-// import { RiArrowDropDownLine } from "react-icons/ri";
 import classes from "./NavItems.module.css"
 import mylogo from "../../assests/mylogo.jpg";
 import { useHistory } from "react-router-dom";
